@@ -1,16 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Search, Compass, Users, Trophy, PlusCircle, Volume2, Sparkles, X, ArrowRight, ShieldCheck, School } from 'lucide-react';
+import { Search, Compass, Plus, X, ArrowRight, ShieldCheck, MapPin, Train } from 'lucide-react';
 import { SAMPLE_EVENTS, type CollegeEvent } from '../data/events';
-import { SAMPLE_HACKERS, type SoloHacker } from '../data/hackers';
 import { haptics } from '../utils/audioHaptics';
 
 interface CommandPaletteProps {
   isOpen: boolean;
   onClose: () => void;
   onSelectEvent: (event: CollegeEvent) => void;
-  onNavigateTab: (tab: 'events' | 'hackers' | 'leaderboard') => void;
   onOpenHostModal: () => void;
-  onOpenSquadBuilder: () => void;
+  onOpenTransit: () => void;
   onFilterCollege: (college: string) => void;
 }
 
@@ -18,29 +16,25 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
   isOpen,
   onClose,
   onSelectEvent,
-  onNavigateTab,
   onOpenHostModal,
-  onOpenSquadBuilder,
+  onOpenTransit,
   onFilterCollege,
 }) => {
   const [query, setQuery] = useState('');
-  const [selectedIndex, setSelectedIndex] = useState(0);
   const inputRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
     if (isOpen) {
       setTimeout(() => inputRef.current?.focus(), 50);
-      setSelectedIndex(0);
       setQuery('');
     }
   }, [isOpen]);
 
-  // Global Ctrl+K listener
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
         e.preventDefault();
-        onClose(); // toggle
+        onClose();
       } else if (e.key === 'Escape' && isOpen) {
         onClose();
       }
@@ -51,7 +45,6 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
 
   if (!isOpen) return null;
 
-  // Filter items
   const cleanQ = query.toLowerCase().trim();
 
   const matchingEvents = SAMPLE_EVENTS.filter(
@@ -59,78 +52,29 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       ev.title.toLowerCase().includes(cleanQ) ||
       ev.college.toLowerCase().includes(cleanQ) ||
       ev.tags.some((t) => t.toLowerCase().includes(cleanQ))
-  ).slice(0, 4);
+  ).slice(0, 5);
 
-  const matchingHackers = SAMPLE_HACKERS.filter(
-    (h: SoloHacker) =>
-      h.name.toLowerCase().includes(cleanQ) ||
-      h.primaryRole.toLowerCase().includes(cleanQ) ||
-      h.college.toLowerCase().includes(cleanQ) ||
-      h.skills.some((s: string) => s.toLowerCase().includes(cleanQ))
-  ).slice(0, 3);
-
-  const quickActions = [
-    {
-      id: 'act-squad',
-      title: 'Assemble Dream Hackathon Squad',
-      subtitle: 'Build 4-person team & mint holographic squad pass',
-      icon: Sparkles,
-      action: () => {
-        onOpenSquadBuilder();
-        onClose();
-      },
-    },
-    {
-      id: 'act-host',
-      title: 'Host / Publish Campus Fest',
-      subtitle: 'Organizer OS for GDG, ACM, IEEE & CSI clubs',
-      icon: PlusCircle,
-      action: () => {
-        onOpenHostModal();
-        onClose();
-      },
-    },
-    {
-      id: 'act-nitrr',
-      title: 'Filter NIT Raipur Radar',
-      subtitle: 'Show all Aavartan, Vigyaan & Code Sprints',
-      icon: School,
-      action: () => {
-        onFilterCollege('NIT Raipur');
-        onNavigateTab('events');
-        onClose();
-      },
-    },
-    {
-      id: 'act-iiitnr',
-      title: 'Filter IIIT Naya Raipur Radar',
-      subtitle: 'Show all Technovate & AI Hackathons',
-      icon: School,
-      action: () => {
-        onFilterCollege('IIIT Naya Raipur');
-        onNavigateTab('events');
-        onClose();
-      },
-    },
+  const quickColleges = [
+    { name: 'NIT Raipur', fest: 'Aavartan 2026' },
+    { name: 'IIIT Naya Raipur', fest: 'Technovate 2026' },
+    { name: 'Rungta', fest: 'VYOM 2026' },
+    { name: 'BIT Durg', fest: 'OJAS 2026' },
+    { name: 'CSVTU', fest: 'UTKARSH Expo' },
   ].filter(
-    (a) =>
-      cleanQ === '' ||
-      a.title.toLowerCase().includes(cleanQ) ||
-      a.subtitle.toLowerCase().includes(cleanQ)
+    (c) => cleanQ === '' || c.name.toLowerCase().includes(cleanQ) || c.fest.toLowerCase().includes(cleanQ)
   );
 
   return (
-    <div className="fixed inset-0 z-50 flex items-start justify-center pt-20 px-4 bg-black/80 backdrop-blur-xl animate-in fade-in duration-200">
+    <div className="fixed inset-0 z-50 flex items-start justify-center pt-20 px-4 bg-black/80 backdrop-blur-sm animate-in fade-in duration-150">
       
-      {/* Palette Container */}
       <div 
-        className="w-full max-w-2xl bg-[#05070B] border border-white/20 rounded-3xl shadow-2xl overflow-hidden text-white flex flex-col"
+        className="w-full max-w-xl bg-[#090C12] border border-neutral-800 rounded-2xl shadow-2xl overflow-hidden text-white flex flex-col text-left"
         onClick={(e) => e.stopPropagation()}
       >
         
         {/* Search Input Bar */}
-        <div className="p-4 border-b border-white/[0.08] flex items-center gap-3 bg-[#030508]">
-          <Search className="w-5 h-5 text-emerald-400" />
+        <div className="p-4 border-b border-neutral-800 flex items-center gap-3 bg-neutral-900/60">
+          <Search className="w-4 h-4 text-emerald-400 shrink-0" />
           <input
             ref={inputRef}
             type="text"
@@ -139,16 +83,16 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
               setQuery(e.target.value);
               haptics.playHover();
             }}
-            placeholder="Search verified events, colleges, solo hackers, or commands..."
-            className="flex-1 bg-transparent text-sm sm:text-base text-white placeholder-slate-500 focus:outline-none font-sans"
+            placeholder="Type college name, fest title, or keywords..."
+            className="flex-1 bg-transparent text-sm text-white placeholder-neutral-500 focus:outline-none font-sans"
           />
           <div className="flex items-center gap-2">
-            <span className="px-2 py-0.5 rounded text-[10px] font-mono bg-white/[0.08] text-slate-400 border border-white/[0.1]">
-              ESC to Close
+            <span className="px-1.5 py-0.5 rounded text-[10px] font-mono bg-neutral-800 text-neutral-400 border border-neutral-700">
+              ESC
             </span>
             <button
               onClick={onClose}
-              className="p-1 rounded-lg text-slate-400 hover:text-white cursor-pointer"
+              className="p-1 rounded text-neutral-400 hover:text-white cursor-pointer"
             >
               <X className="w-4 h-4" />
             </button>
@@ -156,52 +100,99 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         </div>
 
         {/* Results Container */}
-        <div className="max-h-[60vh] overflow-y-auto p-3 space-y-4 text-xs font-sans">
+        <div className="max-h-[55vh] overflow-y-auto p-3 space-y-4 text-xs font-sans">
           
           {/* Quick Actions */}
-          {quickActions.length > 0 && (
-            <div>
-              <span className="text-[10px] font-mono uppercase tracking-wider text-slate-500 px-3 py-1 block">
-                Quick Actions
-              </span>
-              <div className="space-y-1 mt-1">
-                {quickActions.map((act) => {
-                  const Icon = act.icon;
-                  return (
-                    <div
-                      key={act.id}
-                      onClick={() => {
-                        haptics.playClick();
-                        act.action();
-                      }}
-                      className="flex items-center justify-between p-2.5 rounded-xl hover:bg-emerald-500/10 hover:border-emerald-500/30 border border-transparent transition-all cursor-pointer group"
-                    >
-                      <div className="flex items-center gap-3">
-                        <div className="w-7 h-7 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center">
-                          <Icon className="w-4 h-4" />
-                        </div>
-                        <div>
-                          <div className="font-semibold text-white group-hover:text-emerald-300">
-                            {act.title}
-                          </div>
-                          <div className="text-[11px] text-slate-400">
-                            {act.subtitle}
-                          </div>
-                        </div>
-                      </div>
-                      <ArrowRight className="w-3.5 h-3.5 text-slate-500 group-hover:text-emerald-400 group-hover:translate-x-1 transition-all" />
+          <div>
+            <span className="text-[10px] font-mono uppercase tracking-wider text-neutral-500 px-3 py-1 block">
+              Quick Actions
+            </span>
+            <div className="space-y-1 mt-1">
+              <div
+                onClick={() => {
+                  haptics.playClick();
+                  onOpenTransit();
+                  onClose();
+                }}
+                className="flex items-center justify-between p-2.5 rounded-xl hover:bg-neutral-800/60 transition-colors cursor-pointer group"
+              >
+                <div className="flex items-center gap-2.5">
+                  <div className="w-7 h-7 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center">
+                    <Train className="w-3.5 h-3.5" />
+                  </div>
+                  <div>
+                    <div className="font-semibold text-white group-hover:text-emerald-400">
+                      Central India Transit Radar
                     </div>
-                  );
-                })}
+                    <div className="text-[11px] text-neutral-400">
+                      View SECR local trains, bus routes, and fares to campuses
+                    </div>
+                  </div>
+                </div>
+                <ArrowRight className="w-3.5 h-3.5 text-neutral-600 group-hover:text-emerald-400" />
+              </div>
+
+              <div
+                onClick={() => {
+                  haptics.playClick();
+                  onOpenHostModal();
+                  onClose();
+                }}
+                className="flex items-center justify-between p-2.5 rounded-xl hover:bg-neutral-800/60 transition-colors cursor-pointer group"
+              >
+                <div className="flex items-center gap-2.5">
+                  <div className="w-7 h-7 rounded-lg bg-cyan-500/10 text-cyan-400 flex items-center justify-center">
+                    <Plus className="w-3.5 h-3.5" />
+                  </div>
+                  <div>
+                    <div className="font-semibold text-white group-hover:text-cyan-400">
+                      List College Fest / Hackathon
+                    </div>
+                    <div className="text-[11px] text-neutral-400">
+                      Submit upcoming event for authorized university listing
+                    </div>
+                  </div>
+                </div>
+                <ArrowRight className="w-3.5 h-3.5 text-neutral-600 group-hover:text-cyan-400" />
+              </div>
+            </div>
+          </div>
+
+          {/* College Quick Filters */}
+          {quickColleges.length > 0 && (
+            <div>
+              <span className="text-[10px] font-mono uppercase tracking-wider text-neutral-500 px-3 py-1 block">
+                Filter by Accredited College
+              </span>
+              <div className="grid grid-cols-2 gap-1.5 mt-1">
+                {quickColleges.map((c, i) => (
+                  <div
+                    key={i}
+                    onClick={() => {
+                      haptics.playClick();
+                      onFilterCollege(c.name);
+                      onClose();
+                    }}
+                    className="p-2 rounded-lg bg-neutral-900/60 hover:bg-neutral-800 border border-neutral-800 text-left cursor-pointer transition-colors"
+                  >
+                    <div className="font-semibold text-white flex items-center gap-1.5">
+                      <MapPin className="w-3 h-3 text-emerald-400" />
+                      <span>{c.name}</span>
+                    </div>
+                    <div className="text-[11px] text-neutral-400 font-mono">
+                      {c.fest}
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           )}
 
-          {/* Events Section */}
+          {/* Matching Events */}
           {matchingEvents.length > 0 && (
             <div>
-              <span className="text-[10px] font-mono uppercase tracking-wider text-slate-500 px-3 py-1 block">
-                Verified Campus Fests & Hackathons
+              <span className="text-[10px] font-mono uppercase tracking-wider text-neutral-500 px-3 py-1 block">
+                Matching Campus Events
               </span>
               <div className="space-y-1 mt-1">
                 {matchingEvents.map((ev) => (
@@ -212,90 +203,44 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
                       onSelectEvent(ev);
                       onClose();
                     }}
-                    className="flex items-center justify-between p-2.5 rounded-xl hover:bg-white/[0.05] border border-white/[0.04] transition-all cursor-pointer group"
+                    className="flex items-center justify-between p-2.5 rounded-xl hover:bg-neutral-800/60 border border-transparent hover:border-neutral-800 transition-colors cursor-pointer group"
                   >
                     <div className="flex items-center gap-3">
-                      <div className="w-7 h-7 rounded-lg bg-white/[0.05] text-cyan-400 flex items-center justify-center">
-                        <Compass className="w-4 h-4" />
+                      <div className="w-7 h-7 rounded-lg bg-neutral-800 text-neutral-400 flex items-center justify-center">
+                        <Compass className="w-3.5 h-3.5" />
                       </div>
                       <div>
-                        <div className="font-semibold text-white group-hover:text-cyan-300 flex items-center gap-2">
+                        <div className="font-semibold text-white group-hover:text-emerald-400 flex items-center gap-2">
                           <span>{ev.title}</span>
                           <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
                             {ev.prizePool}
                           </span>
                         </div>
-                        <div className="text-[11px] text-slate-400">
+                        <div className="text-[11px] text-neutral-400">
                           {ev.college} • {ev.city}
                         </div>
                       </div>
                     </div>
-                    <span className="text-[10px] font-mono text-slate-500">
-                      View Details ↵
+                    <span className="text-[10px] font-mono text-neutral-500">
+                      View Dossier
                     </span>
                   </div>
                 ))}
               </div>
-            </div>
-          )}
-
-          {/* Hackers Section */}
-          {matchingHackers.length > 0 && (
-            <div>
-              <span className="text-[10px] font-mono uppercase tracking-wider text-slate-500 px-3 py-1 block">
-                Teammate Matchmaker Profiles
-              </span>
-              <div className="space-y-1 mt-1">
-                {matchingHackers.map((hacker: SoloHacker) => (
-                  <div
-                    key={hacker.id}
-                    onClick={() => {
-                      haptics.playClick();
-                      onNavigateTab('hackers');
-                      onClose();
-                    }}
-                    className="flex items-center justify-between p-2.5 rounded-xl hover:bg-white/[0.05] border border-white/[0.04] transition-all cursor-pointer group"
-                  >
-                    <div className="flex items-center gap-3">
-                      <div className="w-7 h-7 rounded-lg bg-white/[0.05] text-amber-400 flex items-center justify-center font-bold font-mono">
-                        {hacker.name[0]}
-                      </div>
-                      <div>
-                        <div className="font-semibold text-white group-hover:text-amber-300">
-                          {hacker.name} — <span className="text-slate-400 font-normal">{hacker.primaryRole}</span>
-                        </div>
-                        <div className="text-[11px] text-slate-500">
-                          {hacker.college} • Skills: {hacker.skills.slice(0, 3).join(', ')}
-                        </div>
-                      </div>
-                    </div>
-                    <span className="text-[10px] font-mono text-slate-500">
-                      Invite to Squad ↵
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {matchingEvents.length === 0 && matchingHackers.length === 0 && quickActions.length === 0 && (
-            <div className="text-center py-8 text-slate-400">
-              <p>No matching commands or fests found for "{query}"</p>
             </div>
           )}
 
         </div>
 
-        {/* Footer Hotkey Legend */}
-        <div className="p-3 bg-[#020306] border-t border-white/[0.06] flex items-center justify-between text-[11px] font-mono text-slate-500">
-          <div className="flex items-center gap-4">
-            <span>↑↓ Navigate</span>
-            <span>↵ Select</span>
-            <span>ESC Close</span>
+        {/* Footer */}
+        <div className="p-3 bg-neutral-900 border-t border-neutral-800 flex items-center justify-between text-[11px] font-mono text-neutral-500">
+          <div className="flex items-center gap-3">
+            <span>ESC to Close</span>
+            <span>Click to Select</span>
           </div>
           <div className="flex items-center gap-1.5 text-emerald-400">
             <ShieldCheck className="w-3.5 h-3.5" />
-            <span>100% Authorized Institutional Feed</span>
+            <span>Verified Official Domains Only</span>
           </div>
         </div>
 
