@@ -56,6 +56,19 @@ export const HostEventModal: React.FC<HostEventModalProps> = ({ isOpen, onClose,
       organizerClub,
       bannerGradient: 'from-emerald-950/80 via-slate-900 to-black',
       accentColor: '#10B981',
+      coverImage: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=1200&q=80',
+      galleryImages: [
+        'https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=1000&q=80',
+        'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1000&q=80'
+      ],
+      videoTeaser: {
+        title: `${title} — Official Student Teaser`,
+        embedUrl: 'https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ',
+        previewUrl: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=1200&q=80',
+        duration: '02:30',
+        organizer: organizerClub,
+        views: '1,200+ views'
+      },
       highlights: ['Free Certificate of Participation', 'Direct Networking with Industry Mentors', 'Cash Prize Distribution on Stage'],
       description: description || tagline,
       schedule: [

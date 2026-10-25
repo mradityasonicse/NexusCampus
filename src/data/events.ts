@@ -1,3 +1,12 @@
+export interface VideoTeaser {
+  title: string;
+  embedUrl: string;
+  previewUrl: string;
+  duration: string;
+  organizer: string;
+  views: string;
+}
+
 export interface CollegeEvent {
   id: string;
   title: string;
@@ -24,6 +33,9 @@ export interface CollegeEvent {
   verificationHash: string; // SHA-256 campus authorization stamp
   bannerGradient: string;
   accentColor: string;
+  coverImage: string;
+  galleryImages: string[];
+  videoTeaser?: VideoTeaser;
   isFeatured?: boolean;
   isHot?: boolean;
   highlights: string[];
@@ -61,6 +73,21 @@ export const SAMPLE_EVENTS: CollegeEvent[] = [
     verificationHash: 'SHA256: 7f8a91c492e...technocracy.nitrr.ac.in [GOVT AUTHORIZED]',
     bannerGradient: 'from-emerald-950/80 via-slate-900 to-black',
     accentColor: '#10B981',
+    coverImage: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=1200&q=80',
+    galleryImages: [
+      'https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=1000&q=80',
+      'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1000&q=80',
+      'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1000&q=80',
+      'https://images.unsplash.com/photo-1567521464027-f127ff144326?auto=format&fit=crop&w=1000&q=80'
+    ],
+    videoTeaser: {
+      title: 'Aavartan 2026 Official Aftermovie & Vigyaan Glimpses',
+      embedUrl: 'https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ',
+      previewUrl: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=1200&q=80',
+      duration: '03:42',
+      organizer: 'Team Technocracy (NIT Raipur)',
+      views: '24,500+ views'
+    },
     isFeatured: true,
     isHot: true,
     highlights: [
@@ -112,6 +139,21 @@ export const SAMPLE_EVENTS: CollegeEvent[] = [
     verificationHash: 'SHA256: d241be9a771...sac.iiitnr.ac.in [STATE GOVT OF CG & NTPC]',
     bannerGradient: 'from-cyan-950/80 via-slate-900 to-black',
     accentColor: '#06B6D4',
+    coverImage: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=1200&q=80',
+    galleryImages: [
+      'https://images.unsplash.com/photo-1561557944-6e7860d1a7eb?auto=format&fit=crop&w=1000&q=80',
+      'https://images.unsplash.com/photo-1508614589041-895b88991e3e?auto=format&fit=crop&w=1000&q=80',
+      'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=1000&q=80',
+      'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1000&q=80'
+    ],
+    videoTeaser: {
+      title: 'Technovate Heavyweight RoboWars & Smart Campus Teaser',
+      embedUrl: 'https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ',
+      previewUrl: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=1200&q=80',
+      duration: '04:18',
+      organizer: 'SAC & Robotics Society (IIIT-NR)',
+      views: '18,200+ views'
+    },
     isFeatured: true,
     isHot: true,
     highlights: [
@@ -161,6 +203,21 @@ export const SAMPLE_EVENTS: CollegeEvent[] = [
     verificationHash: 'SHA256: 3c9b741088a...rungta.ac.in [AICTE APPROVED & NAAC A+]',
     bannerGradient: 'from-amber-950/80 via-slate-900 to-black',
     accentColor: '#F59E0B',
+    coverImage: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1200&q=80',
+    galleryImages: [
+      'https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=1000&q=80',
+      'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1000&q=80',
+      'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=1000&q=80',
+      'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1000&q=80'
+    ],
+    videoTeaser: {
+      title: 'VYOM National Mega Fest & Esports Championship Trailer',
+      embedUrl: 'https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ',
+      previewUrl: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1200&q=80',
+      duration: '05:10',
+      organizer: 'Department of CS & E-Cell (Rungta Bhilai)',
+      views: '32,100+ views'
+    },
     isFeatured: true,
     isHot: false,
     highlights: [
@@ -210,6 +267,20 @@ export const SAMPLE_EVENTS: CollegeEvent[] = [
     verificationHash: 'SHA256: 8a5d1203fe1...bitdurg.ac.in [AUTONOMOUS & NAAC A]',
     bannerGradient: 'from-violet-950/80 via-slate-900 to-black',
     accentColor: '#8B5CF6',
+    coverImage: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1200&q=80',
+    galleryImages: [
+      'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1000&q=80',
+      'https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?auto=format&fit=crop&w=1000&q=80',
+      'https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&fit=crop&w=1000&q=80'
+    ],
+    videoTeaser: {
+      title: 'OJAS Technical Symposium CTF & Designathon Recap',
+      embedUrl: 'https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ',
+      previewUrl: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1200&q=80',
+      duration: '02:50',
+      organizer: 'IEEE & CSI Student Branches (BIT Durg)',
+      views: '11,400+ views'
+    },
     isFeatured: false,
     isHot: true,
     highlights: [
@@ -256,6 +327,20 @@ export const SAMPLE_EVENTS: CollegeEvent[] = [
     verificationHash: 'SHA256: 1f0e499d30c...csvtu.ac.in [STATE UNIVERSITY ACT 2004]',
     bannerGradient: 'from-blue-950/80 via-slate-900 to-black',
     accentColor: '#3B82F6',
+    coverImage: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1200&q=80',
+    galleryImages: [
+      'https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=1000&q=80',
+      'https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1000&q=80',
+      'https://images.unsplash.com/photo-1569683795645-b62e50fbf103?auto=format&fit=crop&w=1000&q=80'
+    ],
+    videoTeaser: {
+      title: 'UTKARSH State Innovation & University Tech Expo Reel',
+      embedUrl: 'https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ',
+      previewUrl: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1200&q=80',
+      duration: '03:15',
+      organizer: 'State Innovation & Patent Cell (CSVTU)',
+      views: '9,800+ views'
+    },
     isFeatured: false,
     isHot: false,
     highlights: [
@@ -301,6 +386,20 @@ export const SAMPLE_EVENTS: CollegeEvent[] = [
     verificationHash: 'SHA256: 9e10ff4a802...sih.gov.in [GOVT OF INDIA MINISTRY OF EDUCATION]',
     bannerGradient: 'from-amber-950/80 via-slate-900 to-black',
     accentColor: '#F59E0B',
+    coverImage: 'https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&w=1200&q=80',
+    galleryImages: [
+      'https://images.unsplash.com/photo-1515187029135-18ee286d815b?auto=format&fit=crop&w=1000&q=80',
+      'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1000&q=80',
+      'https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&fit=crop&w=1000&q=80'
+    ],
+    videoTeaser: {
+      title: 'Smart India Hackathon Grand Finale Nationwide Broadcast',
+      embedUrl: 'https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ',
+      previewUrl: 'https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&w=1200&q=80',
+      duration: '06:30',
+      organizer: 'Ministry of Education Innovation Cell (MIC)',
+      views: '140,000+ views'
+    },
     isFeatured: true,
     isHot: true,
     highlights: [
@@ -346,6 +445,20 @@ export const SAMPLE_EVENTS: CollegeEvent[] = [
     verificationHash: 'SHA256: 4a2d80ef719...techfest.org [IIT BOMBAY STATUTORY INSTITUTE]',
     bannerGradient: 'from-purple-950/80 via-slate-900 to-black',
     accentColor: '#A855F7',
+    coverImage: 'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=1200&q=80',
+    galleryImages: [
+      'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=1000&q=80',
+      'https://images.unsplash.com/photo-1508614589041-895b88991e3e?auto=format&fit=crop&w=1000&q=80',
+      'https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=1000&q=80'
+    ],
+    videoTeaser: {
+      title: 'Techfest Asia’s Largest Science & Tech Festival Official Teaser',
+      embedUrl: 'https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ',
+      previewUrl: 'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=1200&q=80',
+      duration: '04:45',
+      organizer: 'Techfest Core Committee (IIT Bombay)',
+      views: '210,000+ views'
+    },
     isFeatured: true,
     isHot: true,
     highlights: [
@@ -392,6 +505,20 @@ export const SAMPLE_EVENTS: CollegeEvent[] = [
     verificationHash: 'SHA256: b8302fec551...ktj.in [IIT KHARAGPUR TSG AUTHENTICATED]',
     bannerGradient: 'from-emerald-950/80 via-slate-900 to-black',
     accentColor: '#10B981',
+    coverImage: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80',
+    galleryImages: [
+      'https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=1000&q=80',
+      'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1000&q=80',
+      'https://images.unsplash.com/photo-1567521464027-f127ff144326?auto=format&fit=crop&w=1000&q=80'
+    ],
+    videoTeaser: {
+      title: 'Kshitij Annual Techno-Management Fest Official Glimpses',
+      embedUrl: 'https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ',
+      previewUrl: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80',
+      duration: '03:55',
+      organizer: 'Technology Students’ Gymkhana (IIT Kharagpur)',
+      views: '85,000+ views'
+    },
     isFeatured: false,
     isHot: false,
     highlights: [

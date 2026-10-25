@@ -7,6 +7,7 @@ import { EventModal } from './components/EventModal';
 import { HostEventModal } from './components/HostEventModal';
 import { CommandPalette } from './components/CommandPalette';
 import { FlagshipBento } from './components/FlagshipBento';
+import { CampusMarquee } from './components/CampusMarquee';
 import { TransitGuideModal } from './components/TransitGuideModal';
 import { Compass, ArrowUpRight, ShieldCheck, MapPin } from 'lucide-react';
 
@@ -96,6 +97,9 @@ export function App() {
           totalPrizePool={totalPrizePoolFormatted}
           totalEvents={filteredEvents.length}
         />
+
+        {/* Kinetic Campus Accreditation Ribbon */}
+        <CampusMarquee onSelectCollege={(col) => setSelectedCollege(col)} />
 
         {/* Directory Container */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
