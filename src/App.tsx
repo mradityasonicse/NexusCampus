@@ -12,6 +12,9 @@ import { NexusAIAssistant } from './components/NexusAIAssistant';
 import { CommandPalette } from './components/CommandPalette';
 import { CampusHoloMap } from './components/CampusHoloMap';
 import { SquadBuilderModal } from './components/SquadBuilderModal';
+import { FlagshipBento } from './components/FlagshipBento';
+import { HackathonCalculatorModal } from './components/HackathonCalculatorModal';
+import { TransitGuideModal } from './components/TransitGuideModal';
 import { Compass, ArrowUpRight, Layers, Eye, EyeOff } from 'lucide-react';
 import { haptics } from './utils/audioHaptics';
 
@@ -33,6 +36,8 @@ export function App() {
   const [isHostModalOpen, setIsHostModalOpen] = useState<boolean>(false);
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState<boolean>(false);
   const [isSquadBuilderOpen, setIsSquadBuilderOpen] = useState<boolean>(false);
+  const [isCalculatorOpen, setIsCalculatorOpen] = useState<boolean>(false);
+  const [isTransitOpen, setIsTransitOpen] = useState<boolean>(false);
   const [show3DMap, setShow3DMap] = useState<boolean>(true);
 
   // Filter events based on active controls
@@ -82,7 +87,10 @@ export function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#05070B] text-[#E2E8F0] flex flex-col font-sans selection:bg-emerald-500/30 selection:text-emerald-300 relative overflow-x-hidden">
+    <div className="min-h-screen bg-[#04060A] text-[#E2E8F0] flex flex-col font-sans selection:bg-emerald-500/30 selection:text-emerald-300 relative overflow-x-hidden">
+      {/* Procedural Film Grain & Noise Texture */}
+      <div className="film-grain" />
+
       {/* Interactive Vector Particle Grid */}
       <CyberCanvas />
       
@@ -128,7 +136,7 @@ export function App() {
                     CENTRAL INDIA 3D TOPOLOGY GRID
                   </span>
                   <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">
-                    WebGL 60FPS
+                    Three.js WebGL 60FPS
                   </span>
                 </div>
 
@@ -151,10 +159,23 @@ export function App() {
                 </div>
               )}
 
+              {/* Asymmetrical 12-Column Flagship Bento Card */}
+              {filteredEvents.length > 0 && (
+                <div className="pt-2">
+                  <FlagshipBento
+                    event={filteredEvents[0]}
+                    onSelectEvent={(ev) => setSelectedEvent(ev)}
+                    onOpenCalculator={() => setIsCalculatorOpen(true)}
+                    onOpenTransit={() => setIsTransitOpen(true)}
+                    onOpenSquadBuilder={() => setIsSquadBuilderOpen(true)}
+                  />
+                </div>
+              )}
+
               {/* Results Status Header */}
               <div className="flex items-center justify-between gap-4 pt-4 border-t border-white/[0.06]">
                 <div className="flex items-center gap-2">
-                  <span className="text-xs font-mono uppercase tracking-wider text-slate-400">Radar Telemetry</span>
+                  <span className="text-xs font-mono uppercase tracking-wider text-slate-400">All Campuses Radar</span>
                   <span className="px-2 py-0.5 rounded text-xs font-mono font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
                     {filteredEvents.length} Verified Fests & Hackathons
                   </span>
@@ -251,6 +272,18 @@ export function App() {
         onClose={() => setIsSquadBuilderOpen(false)}
       />
 
+      {/* Hackathon ROI & Expense Calculator Modal */}
+      <HackathonCalculatorModal
+        isOpen={isCalculatorOpen}
+        onClose={() => setIsCalculatorOpen(false)}
+      />
+
+      {/* Central India Campus Transit Guide Modal */}
+      <TransitGuideModal
+        isOpen={isTransitOpen}
+        onClose={() => setIsTransitOpen(false)}
+      />
+
       {/* Event Details Deep Dive Modal */}
       <EventModal
         event={selectedEvent}
@@ -265,7 +298,7 @@ export function App() {
       />
 
       {/* Terminal Footer */}
-      <footer className="border-t border-white/[0.08] bg-[#030508] py-10 mt-auto">
+      <footer className="border-t border-white/[0.08] bg-[#020407] py-10 mt-auto">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6 text-xs text-slate-500 font-mono">
           <div className="flex items-center gap-3">
             <div className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
@@ -285,6 +318,9 @@ export function App() {
             </button>
             <button onClick={() => setIsSquadBuilderOpen(true)} className="hover:text-purple-400 transition-colors cursor-pointer">
               Squad Pass
+            </button>
+            <button onClick={() => setIsTransitOpen(true)} className="hover:text-emerald-400 transition-colors cursor-pointer">
+              Transit Radar
             </button>
             <a
               href="https://github.com/mradityasonicse/NexusCampus"
