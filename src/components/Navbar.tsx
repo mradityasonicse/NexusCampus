@@ -16,6 +16,7 @@ interface NavbarProps {
   onOpenCommandPalette: () => void;
   onOpenTransit: () => void;
   onOpenStory: () => void;
+  onOpenPass?: () => void;
   isTechnocracyTheme: boolean;
   onToggleTechnocracyTheme: () => void;
   eventCount: number;
@@ -29,6 +30,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   onOpenCommandPalette,
   onOpenTransit,
   onOpenStory,
+  onOpenPass,
   isTechnocracyTheme,
   onToggleTechnocracyTheme,
   eventCount,
@@ -86,6 +88,20 @@ export const Navbar: React.FC<NavbarProps> = ({
               <Sparkles className="w-3.5 h-3.5 text-emerald-400 animate-spin" style={{ animationDuration: '5s' }} />
               <span className="font-bold">{viewMode === 'story' ? '⚡ Open Directory' : '🎬 3D Fest Story'}</span>
             </button>
+
+            {/* 3D Pass Trigger */}
+            {onOpenPass && (
+              <button
+                onClick={() => {
+                  haptics.playClick();
+                  onOpenPass();
+                }}
+                className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-amber-500/40 bg-amber-500/15 hover:bg-amber-500/25 text-xs font-mono text-amber-300 transition-all cursor-pointer shadow-[0_0_15px_rgba(245,158,11,0.2)]"
+                title="Claim Official 3D Fest Hologram Pass"
+              >
+                <span>🎫 3D Pass</span>
+              </button>
+            )}
 
             {/* Celestial Technocracy Theme Toggle */}
             <button

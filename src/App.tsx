@@ -13,6 +13,8 @@ import { TechnocracyRail } from './components/TechnocracyRail';
 import { FloatingControls } from './components/FloatingControls';
 import { AavartanStoryExperience } from './components/AavartanStoryExperience';
 import { TechnocracyStoryUniverse } from './components/TechnocracyStoryUniverse';
+import { CyberCursor } from './components/CyberCursor';
+import { HoloPassModal } from './components/HoloPassModal';
 import { Compass, ArrowUpRight, ShieldCheck, MapPin, Sparkles, Layers } from 'lucide-react';
 
 const GithubIcon = ({ className = "w-3.5 h-3.5" }: { className?: string }) => (
@@ -33,6 +35,7 @@ export function App() {
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState<boolean>(false);
   const [isTransitOpen, setIsTransitOpen] = useState<boolean>(false);
   const [isStoryOpen, setIsStoryOpen] = useState<boolean>(false);
+  const [isPassModalOpen, setIsPassModalOpen] = useState<boolean>(false);
   const [isTechnocracyTheme, setIsTechnocracyTheme] = useState<boolean>(true);
   const [viewMode, setViewMode] = useState<'story' | 'directory'>('story'); // Default to Full-Screen 3D Story Universe!
 
@@ -101,6 +104,7 @@ export function App() {
             onOpenCommandPalette={() => setIsCommandPaletteOpen(true)}
             onOpenTransit={() => setIsTransitOpen(true)}
             onOpenStory={() => setViewMode('story')}
+            onOpenPass={() => setIsPassModalOpen(true)}
             isTechnocracyTheme={isTechnocracyTheme}
             onToggleTechnocracyTheme={() => setIsTechnocracyTheme(!isTechnocracyTheme)}
             eventCount={filteredEvents.length}
@@ -320,6 +324,15 @@ export function App() {
         onClose={() => setIsHostModalOpen(false)}
         onAddEvent={handleAddEvent}
       />
+
+      {/* 3D Hologram Attendance Pass Modal */}
+      <HoloPassModal
+        isOpen={isPassModalOpen}
+        onClose={() => setIsPassModalOpen(false)}
+      />
+
+      {/* Award-Winning Awwwards Cyber Cursor */}
+      <CyberCursor />
     </>
   );
 }

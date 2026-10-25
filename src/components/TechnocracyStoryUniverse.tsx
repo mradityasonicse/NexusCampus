@@ -21,10 +21,17 @@ import {
   Cpu,
   Layers,
   Flame,
-  Globe2
+  Globe2,
+  Ticket,
+  Clock,
+  Crosshair,
+  ShieldCheck,
+  X,
+  Navigation
 } from 'lucide-react';
 import { type CollegeEvent, SAMPLE_EVENTS } from '../data/events';
 import { haptics } from '../utils/audioHaptics';
+import { HoloPassModal } from './HoloPassModal';
 
 interface TechnocracyStoryUniverseProps {
   onSelectEvent: (event: CollegeEvent) => void;
@@ -184,6 +191,14 @@ const EVENING_GALLERY = [
   'https://technocracy.nitrr.ac.in/static/media/a1.fcbf56811917e6b86373.webp'
 ];
 
+const CAMPUS_VENUES = [
+  { id: 'ccc', name: 'Central Computer Center (CCC Lab)', desc: '1 Gbps Dedicated Fiber • Valorant LAN Finals & Reverse Coding Heats', arena: 'Valorant & Reverse Coding', coords: 'Top Floor, Main Building' },
+  { id: 's4', name: 'Hall S-4 (CSE Department)', desc: 'Sub-Millisecond Execution Terminals • DSA Marathon & Code Sprint Relay', arena: 'DSA Marathon', coords: 'Ground Floor, CS Wing' },
+  { id: 'lawn', name: 'NIT Raipur Central Lawn', desc: '50-Meter Aerial Airspace • FPV Drone Racing & Rocket Rage Launches', arena: 'Drone Racing & Rocketry', coords: 'Main Campus Quadrangle' },
+  { id: 'audi', name: 'Main Auditorium (2,500 Capacity)', desc: 'Keynote Theatre • Ignite Keynote Lectures & Aavartan Ceremonies', arena: 'Ignite & Keynotes', coords: 'Administrative Block' },
+  { id: 'amphi', name: 'Open-Air Amphitheatre', desc: 'All-Terrain Track & Sunset Stage • RoboRace Circuit & Open Mic', arena: 'RoboRace & Open Mic', coords: 'Hostel Sector Front' },
+];
+
 export const TechnocracyStoryUniverse: React.FC<TechnocracyStoryUniverseProps> = ({
   onSelectEvent,
   onSwitchToDirectory
@@ -192,13 +207,35 @@ export const TechnocracyStoryUniverse: React.FC<TechnocracyStoryUniverseProps> =
   const [selectedBranch, setSelectedBranch] = useState<string>('CSE/IT');
   const [isAudioPlaying, setIsAudioPlaying] = useState<boolean>(false);
   const [activePhotoModal, setActivePhotoModal] = useState<string | null>(null);
+  const [isPassModalOpen, setIsPassModalOpen] = useState<boolean>(false);
+  const [isRadarOpen, setIsRadarOpen] = useState<boolean>(false);
   const [arenaFilter, setArenaFilter] = useState<string>('All');
   
+  // Live Countdown Clock to Aavartan 2026 Grand Opening
+  const [timeLeft, setTimeLeft] = useState({ days: 20, hours: 4, minutes: 37, seconds: 43 });
+  useEffect(() => {
+    const targetDate = new Date('2026-11-14T09:00:00+05:30').getTime();
+    const updateCountdown = () => {
+      const now = Date.now();
+      const diff = Math.max(0, targetDate - now);
+      setTimeLeft({
+        days: Math.floor(diff / (1000 * 60 * 60 * 24)),
+        hours: Math.floor((diff / (1000 * 60 * 60)) % 24),
+        minutes: Math.floor((diff / (1000 * 60)) % 60),
+        seconds: Math.floor((diff / 1000) % 60),
+      });
+    };
+    updateCountdown();
+    const timer = setInterval(updateCountdown, 1000);
+    return () => clearInterval(timer);
+  }, []);
+
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const sceneRef = useRef<THREE.Scene | null>(null);
   const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
   const cameraRef = useRef<THREE.PerspectiveCamera | null>(null);
   const meshesRef = useRef<{ [key: string]: THREE.Object3D }>({});
+  const droneRotorsRef = useRef<THREE.Mesh[]>([]);
   const particlesRef = useRef<THREE.Points | null>(null);
   const mouseRef = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
 
@@ -228,11 +265,42 @@ export const TechnocracyStoryUniverse: React.FC<TechnocracyStoryUniverseProps> =
     setCurrentChapterIdx(idx);
   };
 
+  // Wheel / Touchpad Scrollytelling
+  useEffect(() => {
+    let lastWheelTime = 0;
+    const handleWheel = (e: WheelEvent) => {
+      if (activePhotoModal || isPassModalOpen || isRadarOpen) return;
+      const now = Date.now();
+      if (now - lastWheelTime < 650) return; // cooldown
+
+      if (e.deltaY > 35) {
+        lastWheelTime = now;
+        if (currentChapterIdx < CHAPTERS.length - 1) {
+          goToChapter(currentChapterIdx + 1);
+        } else {
+          onSwitchToDirectory();
+        }
+      } else if (e.deltaY < -35) {
+        lastWheelTime = now;
+        if (currentChapterIdx > 0) {
+          goToChapter(currentChapterIdx - 1);
+        }
+      }
+    };
+
+    window.addEventListener('wheel', handleWheel, { passive: true });
+    return () => window.removeEventListener('wheel', handleWheel);
+  }, [currentChapterIdx, activePhotoModal, isPassModalOpen, isRadarOpen, onSwitchToDirectory]);
+
   // Keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (activePhotoModal) {
-        if (e.key === 'Escape') setActivePhotoModal(null);
+      if (activePhotoModal || isPassModalOpen || isRadarOpen) {
+        if (e.key === 'Escape') {
+          setActivePhotoModal(null);
+          setIsPassModalOpen(false);
+          setIsRadarOpen(false);
+        }
         return;
       }
       if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
@@ -252,7 +320,7 @@ export const TechnocracyStoryUniverse: React.FC<TechnocracyStoryUniverseProps> =
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [currentChapterIdx, activePhotoModal, onSwitchToDirectory]);
+  }, [currentChapterIdx, activePhotoModal, isPassModalOpen, isRadarOpen, onSwitchToDirectory]);
 
   // Mouse move parallax tracker
   useEffect(() => {
@@ -287,20 +355,20 @@ export const TechnocracyStoryUniverse: React.FC<TechnocracyStoryUniverseProps> =
     rendererRef.current = renderer;
 
     // Ambient light
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.85);
     scene.add(ambientLight);
 
     // Directional colored point lights
-    const pointLight1 = new THREE.PointLight(0x10b981, 2, 50);
-    pointLight1.position.set(10, 10, 10);
+    const pointLight1 = new THREE.PointLight(0x10b981, 2.5, 60);
+    pointLight1.position.set(12, 12, 12);
     scene.add(pointLight1);
 
-    const pointLight2 = new THREE.PointLight(0x06b6d4, 1.5, 50);
-    pointLight2.position.set(-10, -10, 8);
+    const pointLight2 = new THREE.PointLight(0x06b6d4, 2, 60);
+    pointLight2.position.set(-12, -12, 10);
     scene.add(pointLight2);
 
     // 1. STARFIELD / CELESTIAL PARTICLES
-    const starCount = 600;
+    const starCount = 700;
     const starGeo = new THREE.BufferGeometry();
     const starPos = new Float32Array(starCount * 3);
     const starColors = new Float32Array(starCount * 3);
@@ -310,9 +378,9 @@ export const TechnocracyStoryUniverse: React.FC<TechnocracyStoryUniverseProps> =
     const colorC = new THREE.Color(0xf59e0b);
 
     for (let i = 0; i < starCount; i++) {
-      starPos[i * 3] = (Math.random() - 0.5) * 80;
-      starPos[i * 3 + 1] = (Math.random() - 0.5) * 60;
-      starPos[i * 3 + 2] = (Math.random() - 0.5) * 50;
+      starPos[i * 3] = (Math.random() - 0.5) * 85;
+      starPos[i * 3 + 1] = (Math.random() - 0.5) * 65;
+      starPos[i * 3 + 2] = (Math.random() - 0.5) * 55;
 
       const c = i % 3 === 0 ? colorA : i % 3 === 1 ? colorB : colorC;
       starColors[i * 3] = c.r;
@@ -324,7 +392,7 @@ export const TechnocracyStoryUniverse: React.FC<TechnocracyStoryUniverseProps> =
     starGeo.setAttribute('color', new THREE.BufferAttribute(starColors, 3));
 
     const starMat = new THREE.PointsMaterial({
-      size: 0.28,
+      size: 0.3,
       vertexColors: true,
       transparent: true,
       opacity: 0.85
@@ -357,17 +425,17 @@ export const TechnocracyStoryUniverse: React.FC<TechnocracyStoryUniverseProps> =
 
     // 3. VIGYAAN MESH: Bioluminescent Double Helix / Tree Nodes
     const vigyaanGroup = new THREE.Group();
-    const helixCount = 80;
+    const helixCount = 90;
     const helixGeo = new THREE.BufferGeometry();
     const helixPos = new Float32Array(helixCount * 3);
     for (let i = 0; i < helixCount; i++) {
       const angle = i * 0.25;
-      helixPos[i * 3] = Math.cos(angle) * 3;
+      helixPos[i * 3] = Math.cos(angle) * 3.2;
       helixPos[i * 3 + 1] = (i - helixCount / 2) * 0.16;
-      helixPos[i * 3 + 2] = Math.sin(angle) * 3;
+      helixPos[i * 3 + 2] = Math.sin(angle) * 3.2;
     }
     helixGeo.setAttribute('position', new THREE.BufferAttribute(helixPos, 3));
-    const helixMat = new THREE.PointsMaterial({ color: 0x10b981, size: 0.45, transparent: true, opacity: 0.9 });
+    const helixMat = new THREE.PointsMaterial({ color: 0x10b981, size: 0.45, transparent: true, opacity: 0.95 });
     const helixMesh = new THREE.Points(helixGeo, helixMat);
     vigyaanGroup.add(helixMesh);
 
@@ -383,7 +451,7 @@ export const TechnocracyStoryUniverse: React.FC<TechnocracyStoryUniverseProps> =
     gridHelper.position.set(0, -6, 0);
     igniteGroup.add(gridHelper);
 
-    const monoGeo = new THREE.BoxGeometry(1.5, 6, 1.5);
+    const monoGeo = new THREE.BoxGeometry(1.6, 6.5, 1.6);
     const monoMat = new THREE.MeshStandardMaterial({
       color: 0x06b6d4,
       wireframe: true,
@@ -419,12 +487,58 @@ export const TechnocracyStoryUniverse: React.FC<TechnocracyStoryUniverseProps> =
     scene.add(aavartanGroup);
     meshesRef.current.aavartan = aavartanGroup;
 
-    // 6. ARENAS MESH: Cyber Gateway Rings
+    // 6. ARENAS MESH: 3D FPV QUADCOPTER DRONE MODEL
     const arenasGroup = new THREE.Group();
-    const portalGeo = new THREE.TorusGeometry(4.5, 0.15, 16, 50);
-    const portalMat = new THREE.MeshBasicMaterial({ color: 0xec4899, wireframe: true });
-    const portalMesh = new THREE.Mesh(portalGeo, portalMat);
-    arenasGroup.add(portalMesh);
+    
+    // Central carbon body
+    const bodyGeo = new THREE.BoxGeometry(1.8, 0.4, 1.8);
+    const bodyMat = new THREE.MeshStandardMaterial({ color: 0x10b981, roughness: 0.4, metalness: 0.8 });
+    const bodyMesh = new THREE.Mesh(bodyGeo, bodyMat);
+    arenasGroup.add(bodyMesh);
+
+    // 4 Drone Arms
+    const armGeo = new THREE.CylinderGeometry(0.08, 0.08, 3.8);
+    const armMat = new THREE.MeshStandardMaterial({ color: 0x334155, metalness: 0.9 });
+    
+    const arm1 = new THREE.Mesh(armGeo, armMat);
+    arm1.rotation.z = Math.PI / 4;
+    arenasGroup.add(arm1);
+
+    const arm2 = new THREE.Mesh(armGeo, armMat);
+    arm2.rotation.z = -Math.PI / 4;
+    arenasGroup.add(arm2);
+
+    // 4 Motor Hubs + Spinning Propellers
+    const rotorGeo = new THREE.BoxGeometry(1.8, 0.04, 0.2);
+    const rotorMat = new THREE.MeshBasicMaterial({ color: 0x34d399 });
+    const localRotors: THREE.Mesh[] = [];
+
+    const hubPositions = [
+      [-1.3, 0.3, -1.3],
+      [1.3, 0.3, -1.3],
+      [-1.3, 0.3, 1.3],
+      [1.3, 0.3, 1.3]
+    ];
+
+    hubPositions.forEach((pos) => {
+      const hubGeo = new THREE.CylinderGeometry(0.2, 0.2, 0.3);
+      const hubMat = new THREE.MeshStandardMaterial({ color: 0x06b6d4 });
+      const hub = new THREE.Mesh(hubGeo, hubMat);
+      hub.position.set(pos[0], pos[1], pos[2]);
+      arenasGroup.add(hub);
+
+      const prop = new THREE.Mesh(rotorGeo, rotorMat);
+      prop.position.set(pos[0], pos[1] + 0.18, pos[2]);
+      arenasGroup.add(prop);
+      localRotors.push(prop);
+    });
+
+    droneRotorsRef.current = localRotors;
+
+    // Glowing Drone LED beacon light
+    const droneLed = new THREE.PointLight(0x10b981, 3, 10);
+    droneLed.position.set(0, 0.8, 0);
+    arenasGroup.add(droneLed);
 
     arenasGroup.position.set(6, 0, 0);
     arenasGroup.visible = false;
@@ -473,9 +587,15 @@ export const TechnocracyStoryUniverse: React.FC<TechnocracyStoryUniverseProps> =
       if (gearMesh2) {
         gearMesh2.rotation.z = -elapsedTime * 0.45;
       }
-      if (portalMesh) {
-        portalMesh.rotation.z = elapsedTime * 0.25;
+
+      // Drone model animations
+      if (arenasGroup) {
+        arenasGroup.rotation.y = elapsedTime * 0.35;
+        arenasGroup.position.y = Math.sin(elapsedTime * 1.5) * 0.35;
       }
+      droneRotorsRef.current.forEach((r, idx) => {
+        r.rotation.y += idx % 2 === 0 ? 0.45 : -0.45;
+      });
 
       renderer.render(scene, camera);
     };
@@ -519,7 +639,7 @@ export const TechnocracyStoryUniverse: React.FC<TechnocracyStoryUniverseProps> =
       {/* 1. Dynamic WebGL Canvas (Full-Screen Three.js Spatial Layer) */}
       <canvas
         ref={canvasRef}
-        className="fixed inset-0 w-full h-full pointer-events-none z-10 opacity-70"
+        className="fixed inset-0 w-full h-full pointer-events-none z-10 opacity-75"
       />
 
       {/* 2. Official Technocracy Atmospheric Photo Backdrop */}
@@ -534,8 +654,8 @@ export const TechnocracyStoryUniverse: React.FC<TechnocracyStoryUniverseProps> =
       {/* Atmospheric Radial Gradient Overlay */}
       <div className={`fixed inset-0 pointer-events-none z-0 bg-gradient-to-b ${currentChapter.themeClass} opacity-85 transition-colors duration-1000`} />
 
-      {/* Top HUD: Navigation & Audio Master Control */}
-      <header className="fixed top-0 left-0 right-0 z-50 px-4 sm:px-8 py-4 backdrop-blur-xl bg-black/40 border-b border-white/10 flex items-center justify-between">
+      {/* Top HUD: Navigation, Countdown & Master Controls */}
+      <header className="fixed top-0 left-0 right-0 z-50 px-4 sm:px-8 py-3.5 backdrop-blur-xl bg-black/45 border-b border-white/10 flex items-center justify-between">
         
         {/* Left: Technocracy & Nexus Identity */}
         <div className="flex items-center gap-3">
@@ -559,26 +679,44 @@ export const TechnocracyStoryUniverse: React.FC<TechnocracyStoryUniverseProps> =
           </div>
         </div>
 
-        {/* Center: Chapter Quick Indicators */}
-        <div className="hidden lg:flex items-center gap-1.5 p-1 rounded-xl bg-white/5 border border-white/10">
-          {CHAPTERS.map((ch, idx) => (
-            <button
-              key={ch.id}
-              onClick={() => goToChapter(idx)}
-              className={`px-3 py-1 rounded-lg text-xs font-mono font-semibold transition-all cursor-pointer ${
-                idx === currentChapterIdx
-                  ? 'bg-emerald-500 text-black shadow-[0_0_15px_rgba(16,185,129,0.5)]'
-                  : 'text-slate-400 hover:text-white hover:bg-white/10'
-              }`}
-            >
-              0{idx} {ch.id.toUpperCase()}
-            </button>
-          ))}
+        {/* Center: Live Fest Countdown Clock */}
+        <div className="hidden xl:flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-white/5 border border-white/10 text-xs font-mono">
+          <Clock className="w-3.5 h-3.5 text-emerald-400 animate-pulse" />
+          <span className="text-slate-400">AAVARTAN KICKOFF:</span>
+          <span className="font-bold text-emerald-300">
+            {timeLeft.days}d {timeLeft.hours}h {timeLeft.minutes}m {timeLeft.seconds}s
+          </span>
         </div>
 
-        {/* Right: Sound Synthesizer & Directory Switcher */}
-        <div className="flex items-center gap-3">
+        {/* Right: Tactical Radar, 3D Pass, Audio Synth & Directory Switcher */}
+        <div className="flex items-center gap-2.5">
           
+          {/* Tactical Campus Radar */}
+          <button
+            onClick={() => {
+              haptics.playClick();
+              setIsRadarOpen(true);
+            }}
+            className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 text-xs font-mono text-slate-300 transition-all cursor-pointer"
+            title="NIT Raipur Campus Tactical Arena Radar"
+          >
+            <Crosshair className="w-3.5 h-3.5 text-cyan-400" />
+            <span>RADAR</span>
+          </button>
+
+          {/* 3D Holographic Pass Creator */}
+          <button
+            onClick={() => {
+              haptics.playClick();
+              setIsPassModalOpen(true);
+            }}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-amber-500/40 bg-amber-500/15 text-amber-300 hover:bg-amber-500/25 text-xs font-mono font-bold transition-all shadow-[0_0_15px_rgba(245,158,11,0.2)] cursor-pointer"
+            title="Generate and Download Official 3D Fest Hologram Pass"
+          >
+            <Ticket className="w-3.5 h-3.5 text-amber-400" />
+            <span className="hidden md:inline">3D PASS</span>
+          </button>
+
           {/* Ambient Synthesizer Equalizer Button */}
           <button
             onClick={toggleAudio}
@@ -590,8 +728,8 @@ export const TechnocracyStoryUniverse: React.FC<TechnocracyStoryUniverseProps> =
             title="Toggle Procedural Cosmic Ambient Synthesizer (Web Audio API)"
           >
             {isAudioPlaying ? <Volume2 className="w-3.5 h-3.5 text-emerald-400 animate-pulse" /> : <VolumeX className="w-3.5 h-3.5" />}
-            <span className="hidden sm:inline font-bold">
-              {isAudioPlaying ? 'BINAURAL SYNTH: ON' : 'AUDIO: OFF'}
+            <span className="hidden lg:inline font-bold">
+              {isAudioPlaying ? 'BINAURAL: ON' : 'AUDIO: OFF'}
             </span>
             {isAudioPlaying && (
               <div className="flex items-end gap-0.5 h-3">
@@ -990,9 +1128,9 @@ export const TechnocracyStoryUniverse: React.FC<TechnocracyStoryUniverseProps> =
       <footer className="fixed bottom-0 left-0 right-0 z-40 px-4 sm:px-8 py-3 backdrop-blur-xl bg-black/60 border-t border-white/10">
         <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
           
-          {/* Left: Keyboard Controls Helper */}
+          {/* Left: Keyboard Controls Helper & Telemetry */}
           <div className="hidden sm:flex items-center gap-2 text-xs font-mono text-slate-400">
-            <span>Navigate:</span>
+            <span>Scroll / Drag 3D</span>
             <kbd className="px-1.5 py-0.5 rounded bg-white/10 border border-white/20 text-white text-[10px]">
               ← Left
             </kbd>
@@ -1078,6 +1216,89 @@ export const TechnocracyStoryUniverse: React.FC<TechnocracyStoryUniverseProps> =
                   className="px-3 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-xs font-mono text-white cursor-pointer"
                 >
                   Close (Esc)
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Hologram Pass Generator Modal */}
+      <HoloPassModal
+        isOpen={isPassModalOpen}
+        onClose={() => setIsPassModalOpen(false)}
+      />
+
+      {/* Campus Tactical Radar Blueprint Modal */}
+      <AnimatePresence>
+        {isRadarOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setIsRadarOpen(false)}
+            className="fixed inset-0 z-50 bg-black/85 backdrop-blur-xl flex items-center justify-center p-4 cursor-pointer"
+          >
+            <motion.div
+              initial={{ scale: 0.92, y: 20 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.92, y: 20 }}
+              onClick={(e) => e.stopPropagation()}
+              className="relative w-full max-w-3xl bg-[#090D18] border border-cyan-500/30 rounded-3xl p-6 sm:p-8 shadow-[0_0_50px_rgba(6,182,212,0.2)] text-left"
+            >
+              <div className="flex items-center justify-between mb-4 border-b border-white/10 pb-3">
+                <div className="flex items-center gap-2">
+                  <Navigation className="w-5 h-5 text-cyan-400" />
+                  <div>
+                    <h3 className="font-heading font-black text-lg text-white">
+                      NIT RAIPUR CAMPUS TACTICAL RADAR
+                    </h3>
+                    <p className="text-[11px] font-mono text-cyan-300">
+                      Primary Battleground Coordinates & Department Hubs
+                    </p>
+                  </div>
+                </div>
+                <button
+                  onClick={() => setIsRadarOpen(false)}
+                  className="p-2 rounded-full bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+
+              {/* Venue Nodes List */}
+              <div className="space-y-3 max-h-[60vh] overflow-y-auto pr-1">
+                {CAMPUS_VENUES.map((v) => (
+                  <div
+                    key={v.id}
+                    className="p-3.5 rounded-xl bg-black/50 border border-white/10 hover:border-cyan-500/40 transition-colors"
+                  >
+                    <div className="flex items-center justify-between">
+                      <span className="font-mono font-bold text-sm text-white">
+                        {v.name}
+                      </span>
+                      <span className="text-[10px] font-mono text-cyan-400 bg-cyan-500/10 px-2 py-0.5 rounded border border-cyan-500/30">
+                        {v.arena}
+                      </span>
+                    </div>
+                    <p className="text-xs text-slate-300 mt-1 font-sans">
+                      {v.desc}
+                    </p>
+                    <div className="text-[10px] font-mono text-slate-500 mt-2 flex items-center gap-1">
+                      <MapPin className="w-3 h-3 text-emerald-400" />
+                      <span>Location: {v.coords}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-4 pt-3 border-t border-white/10 flex items-center justify-between text-xs font-mono text-slate-400">
+                <span>Free On-Campus Transit: Auto-Rickshaw Shuttles Available from Main Gate</span>
+                <button
+                  onClick={() => setIsRadarOpen(false)}
+                  className="px-4 py-2 rounded-xl bg-cyan-500 text-black font-bold hover:bg-cyan-400 cursor-pointer"
+                >
+                  Close Radar
                 </button>
               </div>
             </motion.div>
