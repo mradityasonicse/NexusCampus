@@ -31,6 +31,10 @@ export interface CollegeEvent {
   officialWebsite: string;
   officialVerificationDomain: string;
   verificationHash: string; // SHA-256 campus authorization stamp
+  time?: string;
+  venueCode?: string;
+  bannerArtTitle?: string;
+  registrationLink?: string;
   bannerGradient: string;
   accentColor: string;
   coverImage: string;
@@ -111,6 +115,455 @@ export const SAMPLE_EVENTS: CollegeEvent[] = [
       { rank: 'Best All-Women Hacker Team', amount: '₹40,000', perks: 'Empowerment Award Trophy + Special Mentorship' }
     ],
     contactEmail: 'aavartan@nitrr.ac.in',
+    contactPhone: '+91 771 2254200'
+  },
+  {
+    id: 'nitrr-dsa-marathon',
+    title: 'DSA MARATHON — Competitive Data Structures & Algorithmic Sprint',
+    tagline: 'Code • Collaborate • Conquer: Solve Maximum Problems from 30 Curated Standard DSA Challenges',
+    bannerArtTitle: 'DSA MARATHON',
+    category: 'Technical',
+    college: 'National Institute of Technology (NIT), Raipur',
+    shortCollege: 'NIT Raipur',
+    city: 'Raipur, Chhattisgarh',
+    isRegional: true,
+    venue: 'Hall S-4, Department of Computer Science & IT, NIT Raipur',
+    venueCode: 'S-4',
+    time: '11:30 AM - 1:00 PM',
+    mode: 'On-Campus',
+    startDate: 'Feb 01, 2026',
+    endDate: 'Feb 01, 2026',
+    deadline: 'Jan 31, 2026',
+    prizePool: '₹40,000',
+    entryFee: 'Free',
+    registeredCount: 380,
+    maxSlots: 500,
+    teamSize: 'Solo or Pair',
+    tags: ['DSA Marathon', 'Competitive Programming', 'LeetCode Hard', 'Graphs & DP', 'NIT Raipur'],
+    organizerClub: 'Team Technocracy (Coding Wing, NIT Raipur)',
+    officialWebsite: 'https://technocracy.nitrr.ac.in/events',
+    registrationLink: 'https://technocracy.nitrr.ac.in/events',
+    officialVerificationDomain: 'technocracy.nitrr.ac.in',
+    verificationHash: 'SHA256: dsa2026nitrr...technocracy.nitrr.ac.in [OFFICIAL ARENA]',
+    bannerGradient: 'from-emerald-950/90 via-slate-900 to-black',
+    accentColor: '#10B981',
+    coverImage: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1200&q=80',
+    galleryImages: [
+      'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1000&q=80',
+      'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1000&q=80'
+    ],
+    videoTeaser: {
+      title: 'DSA Marathon & Competitive Coding Heats — Team Technocracy',
+      embedUrl: 'https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ',
+      previewUrl: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1200&q=80',
+      duration: '02:40',
+      organizer: 'Team Technocracy NITRR',
+      views: '12,400+ views'
+    },
+    isFeatured: true,
+    isHot: true,
+    highlights: [
+      '30 Standard Data Structure & Algorithm problem challenges on HackerRank/Codeforces',
+      'Instant leaderboard scoring with sub-millisecond execution runtime metrics',
+      'Fast-track placement preparation kits & mechanical keyboards for champions'
+    ],
+    description: 'An elite speed-solving contest based on quick selection and optimal algorithmic solving from a standard set of 30 standard DSA questions spanning Dynamic Programming, Graph Traversals, and Greedy Paradigms.',
+    schedule: [
+      { time: '11:00 AM', activity: 'Reporting & Terminal Setup at Hall S-4' },
+      { time: '11:30 AM', activity: 'Challenge Platform Unlock & Live Coding Sprint' },
+      { time: '01:00 PM', activity: 'Automated Test Suite Freeze & Final Leaderboard Evaluation' }
+    ],
+    prizes: [
+      { rank: 'Grand Champion', amount: '₹20,000', perks: 'DSA Trophy + Coding Gear + Certificate of Excellence' },
+      { rank: '1st Runner Up', amount: '₹12,000', perks: 'Silver Memento + Tech Goodies' },
+      { rank: 'Fastest Solve Award', amount: '₹8,000', perks: 'Speedcoder Medal' }
+    ],
+    contactEmail: 'dsa@technocracy.nitrr.ac.in',
+    contactPhone: '+91 771 2254200'
+  },
+  {
+    id: 'nitrr-drone-racing',
+    title: 'DRONE RACING — High-Speed FPV Obstacle Circuit Grand Prix',
+    tagline: 'High-Velocity Aerial Acrobatics & Time-Attack Obstacle Navigation over Central Lawn',
+    bannerArtTitle: 'DRONE RACING',
+    category: 'Robotics',
+    college: 'National Institute of Technology (NIT), Raipur',
+    shortCollege: 'NIT Raipur',
+    city: 'Raipur, Chhattisgarh',
+    isRegional: true,
+    venue: 'Outdoors Central Lawn Circuit, NIT Raipur',
+    venueCode: 'Outdoors',
+    time: '2:30 PM - 4:00 PM',
+    mode: 'On-Campus',
+    startDate: 'Feb 02, 2026',
+    endDate: 'Feb 02, 2026',
+    deadline: 'Jan 31, 2026',
+    prizePool: '₹50,000',
+    entryFee: 'Free',
+    registeredCount: 160,
+    maxSlots: 200,
+    teamSize: '1 - 3 Members',
+    tags: ['Drone Racing', 'FPV Quadcopter', 'Aerial Acrobatics', 'Telemetry', 'NIT Raipur'],
+    organizerClub: 'Team Technocracy (Robotics Wing, NIT Raipur)',
+    officialWebsite: 'https://technocracy.nitrr.ac.in/events',
+    registrationLink: 'https://technocracy.nitrr.ac.in/events',
+    officialVerificationDomain: 'technocracy.nitrr.ac.in',
+    verificationHash: 'SHA256: drone2026nitrr...technocracy.nitrr.ac.in [OFFICIAL ARENA]',
+    bannerGradient: 'from-amber-950/90 via-slate-900 to-black',
+    accentColor: '#F59E0B',
+    coverImage: 'https://images.unsplash.com/photo-1508614589041-895b88991e3e?auto=format&fit=crop&w=1200&q=80',
+    galleryImages: [
+      'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=1000&q=80',
+      'https://images.unsplash.com/photo-1561557944-6e7860d1a7eb?auto=format&fit=crop&w=1000&q=80'
+    ],
+    videoTeaser: {
+      title: 'Drone Racing Circuit Night Heats — NIT Raipur Central Lawn',
+      embedUrl: 'https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ',
+      previewUrl: 'https://images.unsplash.com/photo-1508614589041-895b88991e3e?auto=format&fit=crop&w=1200&q=80',
+      duration: '03:10',
+      organizer: 'Team Technocracy NITRR',
+      views: '16,200+ views'
+    },
+    isFeatured: true,
+    isHot: true,
+    highlights: [
+      'Custom built FPV neon ring slalom circuit on NIT Raipur Central Lawn',
+      'Laser lap timing system with live high-definition pilot feed display',
+      'Teams bring their own quadcopters / FPV drones for minimum-time circuit sprint'
+    ],
+    description: 'Each team must bring their own custom FPV quadcopter and maneuver through intense air-gates, tight hairpin turns, and elevation chicanes in minimum time under official FPV racing rules.',
+    schedule: [
+      { time: '01:30 PM', activity: 'Pilot Scrutiny & Frequency Sync at Central Lawn' },
+      { time: '02:30 PM', activity: 'Time-Attack Solo Qualification Rounds' },
+      { time: '03:45 PM', activity: 'Top 4 Final Elimination Race & Award Ceremony' }
+    ],
+    prizes: [
+      { rank: 'Circuit Champion', amount: '₹25,000', perks: 'Golden Propeller Trophy + Brushless Motor Kits' },
+      { rank: '1st Runner Up', amount: '₹15,000', perks: 'High-Discharge LiPo Batteries' },
+      { rank: 'Best Aerodynamic Design', amount: '₹10,000', perks: 'Aero Excellence Memento' }
+    ],
+    contactEmail: 'drones@technocracy.nitrr.ac.in',
+    contactPhone: '+91 771 2254200'
+  },
+  {
+    id: 'nitrr-code-sprint-relay',
+    title: 'CODE SPRINT RELAY — Team-Based Competitive Baton Relay',
+    tagline: '3-Hacker Team Relay: Solve Code, Pass the Terminal Baton, Optimize Under Pressure',
+    bannerArtTitle: 'CODE SPRINT RELAY',
+    category: 'Hackathon',
+    college: 'National Institute of Technology (NIT), Raipur',
+    shortCollege: 'NIT Raipur',
+    city: 'Raipur, Chhattisgarh',
+    isRegional: true,
+    venue: 'Central Computer Center (CCC Lab), NIT Raipur',
+    venueCode: 'CCC Lab',
+    time: '11:30 AM - 1:00 PM',
+    mode: 'On-Campus',
+    startDate: 'Feb 02, 2026',
+    endDate: 'Feb 02, 2026',
+    deadline: 'Jan 31, 2026',
+    prizePool: '₹35,000',
+    entryFee: 'Free',
+    registeredCount: 220,
+    maxSlots: 300,
+    teamSize: '3 Members',
+    tags: ['Code Sprint', 'Relay Challenge', 'CCC Lab', 'Algorithms', 'NIT Raipur'],
+    organizerClub: 'Team Technocracy (Software Wing, NIT Raipur)',
+    officialWebsite: 'https://technocracy.nitrr.ac.in/events',
+    registrationLink: 'https://technocracy.nitrr.ac.in/events',
+    officialVerificationDomain: 'technocracy.nitrr.ac.in',
+    verificationHash: 'SHA256: relay2026nitrr...technocracy.nitrr.ac.in [OFFICIAL ARENA]',
+    bannerGradient: 'from-cyan-950/90 via-slate-900 to-black',
+    accentColor: '#06B6D4',
+    coverImage: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1200&q=80',
+    galleryImages: [
+      'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1000&q=80',
+      'https://images.unsplash.com/photo-1515187029135-18ee286d815b?auto=format&fit=crop&w=1000&q=80'
+    ],
+    videoTeaser: {
+      title: 'Code Sprint Relay Adrenaline Heats — CCC Lab NIT Raipur',
+      embedUrl: 'https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ',
+      previewUrl: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1200&q=80',
+      duration: '02:15',
+      organizer: 'Team Technocracy NITRR',
+      views: '9,800+ views'
+    },
+    isFeatured: false,
+    isHot: true,
+    highlights: [
+      'High-pressure coding relay: each teammate gets 20 minutes at keyboard before tag-out',
+      'No verbal communication permitted during terminal handoff',
+      'Requires reading teammate’s code instantly and completing algorithms to pass unit tests'
+    ],
+    description: 'A dynamic team-based speed coding competition testing collaborative programming, algorithmic clarity, and rapid problem decomposition under intense ticking clocks in CCC Lab.',
+    schedule: [
+      { time: '11:00 AM', activity: 'CCC Lab Station Allocation' },
+      { time: '11:30 AM', activity: 'Leg 1 Hacker Start' },
+      { time: '12:10 PM', activity: 'Leg 2 Tag & Baton Handover' },
+      { time: '12:50 PM', activity: 'Anchor Hacker Final Submissions' }
+    ],
+    prizes: [
+      { rank: 'Winning Relay Trio', amount: '₹18,000', perks: 'Champion Trophies + Team Certificates' },
+      { rank: '1st Runner Up', amount: '₹11,000', perks: 'Silver Medals' },
+      { rank: 'Cleanest Code Base', amount: '₹6,000', perks: 'Clean Architecture Plaque' }
+    ],
+    contactEmail: 'relay@technocracy.nitrr.ac.in',
+    contactPhone: '+91 771 2254200'
+  },
+  {
+    id: 'nitrr-techno-graphix',
+    title: 'TECHNO GRAPHIX — Design with Conviction Digital Artistry',
+    tagline: 'Futuristic Graphic & UI/UX Poster Design Challenge on the Fest Theme',
+    bannerArtTitle: 'TECHNO GRAPHIX',
+    category: 'Technical',
+    college: 'National Institute of Technology (NIT), Raipur',
+    shortCollege: 'NIT Raipur',
+    city: 'Raipur, Chhattisgarh',
+    isRegional: true,
+    venue: 'Studio Hall G-4, Department of Architecture, NIT Raipur',
+    venueCode: 'G-4',
+    time: '4:00 PM - 5:00 PM',
+    mode: 'On-Campus',
+    startDate: 'Feb 02, 2026',
+    endDate: 'Feb 02, 2026',
+    deadline: 'Jan 31, 2026',
+    prizePool: '₹25,000',
+    entryFee: 'Free',
+    registeredCount: 190,
+    maxSlots: 250,
+    teamSize: 'Solo',
+    tags: ['Techno Graphix', 'Graphic Design', 'Figma', 'Photoshop', 'Theme Art'],
+    organizerClub: 'Team Technocracy (Design Wing, NIT Raipur)',
+    officialWebsite: 'https://technocracy.nitrr.ac.in/events',
+    registrationLink: 'https://technocracy.nitrr.ac.in/events',
+    officialVerificationDomain: 'technocracy.nitrr.ac.in',
+    verificationHash: 'SHA256: graphix2026nitrr...technocracy.nitrr.ac.in [OFFICIAL ARENA]',
+    bannerGradient: 'from-purple-950/90 via-slate-900 to-black',
+    accentColor: '#A855F7',
+    coverImage: 'https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&w=1200&q=80',
+    galleryImages: [
+      'https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?auto=format&fit=crop&w=1000&q=80',
+      'https://images.unsplash.com/photo-1567521464027-f127ff144326?auto=format&fit=crop&w=1000&q=80'
+    ],
+    videoTeaser: {
+      title: 'Techno Graphix Digital Art Showcase — NIT Raipur',
+      embedUrl: 'https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ',
+      previewUrl: 'https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&w=1200&q=80',
+      duration: '02:00',
+      organizer: 'Team Technocracy NITRR',
+      views: '7,100+ views'
+    },
+    isFeatured: false,
+    isHot: false,
+    highlights: [
+      'Evaluated by senior UI/UX directors and visual artists',
+      'Live prompt-based design creation in Photoshop / Figma / Illustrator',
+      'Winning artworks displayed in the Aavartan National Exhibition Gallery'
+    ],
+    description: 'An elite visual artistry challenge focusing on graphic design, typography pairing, aesthetic composition, and thematic digital poster rendering based on the annual symposium concept.',
+    schedule: [
+      { time: '03:45 PM', activity: 'Studio G-4 Workstation Setup' },
+      { time: '04:00 PM', activity: 'Theme Reveal & 60-Minute Sprint Begins' },
+      { time: '05:00 PM', activity: 'Art Export, Submissions & Jury Critique' }
+    ],
+    prizes: [
+      { rank: 'Best Digital Artist', amount: '₹14,000', perks: 'Golden Stylus Trophy + Design Licenses' },
+      { rank: 'Runner Up', amount: '₹8,000', perks: 'Silver Memento' },
+      { rank: 'Best Visual Hierarchy', amount: '₹3,000', perks: 'Creative Excellence Certificate' }
+    ],
+    contactEmail: 'design@technocracy.nitrr.ac.in',
+    contactPhone: '+91 771 2254200'
+  },
+  {
+    id: 'nitrr-robowars',
+    title: 'ROBO WARS — Combat Steel Cage Death Match',
+    tagline: 'High-Torque Crushers, Spinning Blades & 15kg/30kg Armored Robot Destruction Arena',
+    bannerArtTitle: 'ROBO WARS',
+    category: 'Robotics',
+    college: 'National Institute of Technology (NIT), Raipur',
+    shortCollege: 'NIT Raipur',
+    city: 'Raipur, Chhattisgarh',
+    isRegional: true,
+    venue: 'Outdoors Bulletproof Enclosed Cage, Central Ground, NIT Raipur',
+    venueCode: 'Outdoors',
+    time: '11:30 AM - 1:00 PM',
+    mode: 'On-Campus',
+    startDate: 'Feb 01, 2026',
+    endDate: 'Feb 02, 2026',
+    deadline: 'Jan 31, 2026',
+    prizePool: '₹75,000',
+    entryFee: 'Nominal Arena Fee',
+    registeredCount: 85,
+    maxSlots: 100,
+    teamSize: '2 - 4 Members',
+    tags: ['Robo Wars', 'Combat Robotics', 'Bulletproof Arena', 'Death Match', 'NIT Raipur'],
+    organizerClub: 'Team Technocracy (Robotics Wing, NIT Raipur)',
+    officialWebsite: 'https://technocracy.nitrr.ac.in/events',
+    registrationLink: 'https://technocracy.nitrr.ac.in/events',
+    officialVerificationDomain: 'technocracy.nitrr.ac.in',
+    verificationHash: 'SHA256: robowar2026nitrr...technocracy.nitrr.ac.in [OFFICIAL ARENA]',
+    bannerGradient: 'from-red-950/90 via-slate-900 to-black',
+    accentColor: '#EF4444',
+    coverImage: 'https://images.unsplash.com/photo-1561557944-6e7860d1a7eb?auto=format&fit=crop&w=1200&q=80',
+    galleryImages: [
+      'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=1000&q=80',
+      'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=1000&q=80'
+    ],
+    videoTeaser: {
+      title: 'RoboWars Cage Fights Sparks & Heavy Metal Carnage — NIT Raipur',
+      embedUrl: 'https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ',
+      previewUrl: 'https://images.unsplash.com/photo-1561557944-6e7860d1a7eb?auto=format&fit=crop&w=1200&q=80',
+      duration: '04:10',
+      organizer: 'Team Technocracy NITRR',
+      views: '38,000+ views'
+    },
+    isFeatured: true,
+    isHot: true,
+    highlights: [
+      'Heavyweight 15kg & 30kg combat categories with pneumatic flippers & vertical spinners',
+      'Double-walled polycarbonate & steel mesh safety cage built to international standards',
+      'Live arena commentary and multi-angle slow motion action replays'
+    ],
+    description: 'An electrifying combat robotics arena where armored mechanical gladiators clash in an enclosed death match cage, testing structural durability, drivetrain torque, and tactical driving skills.',
+    schedule: [
+      { time: '10:30 AM', activity: 'Weight In, Fail-Safe Test & Weapon Scrutiny' },
+      { time: '11:30 AM', activity: 'Quarter-Final Heavy Metal Bout Rounds' },
+      { time: '12:40 PM', activity: 'Championship Title Bout & Crowd Destruction Showcase' }
+    ],
+    prizes: [
+      { rank: 'Grand Cage Champion', amount: '₹40,000', perks: 'Golden Gear Trophy + Industrial Machine Sponsorship' },
+      { rank: '1st Runner Up', amount: '₹22,000', perks: 'Heavy Metal Plaque' },
+      { rank: 'Most Aggressive Bot', amount: '₹13,000', perks: 'Best Weapon Engineering Award' }
+    ],
+    contactEmail: 'robowar@technocracy.nitrr.ac.in',
+    contactPhone: '+91 771 2254200'
+  },
+  {
+    id: 'nitrr-reverse-coding',
+    title: 'REVERSE CODING — Binary Decompilation & Logic Reconstruction',
+    tagline: 'Work Backward from Input/Output Behaviors to Reconstruct Secret Source Algorithms',
+    bannerArtTitle: 'REVERSE CODING',
+    category: 'Technical',
+    college: 'National Institute of Technology (NIT), Raipur',
+    shortCollege: 'NIT Raipur',
+    city: 'Raipur, Chhattisgarh',
+    isRegional: true,
+    venue: 'Central Computer Center (CCC), NIT Raipur',
+    venueCode: 'CCC',
+    time: '3:00 PM - 5:00 PM',
+    mode: 'On-Campus',
+    startDate: 'Feb 02, 2026',
+    endDate: 'Feb 02, 2026',
+    deadline: 'Jan 31, 2026',
+    prizePool: '₹35,000',
+    entryFee: 'Free',
+    registeredCount: 210,
+    maxSlots: 300,
+    teamSize: 'Solo or Pair',
+    tags: ['Reverse Coding', 'Black Box Testing', 'Binary Analysis', 'CCC Lab', 'NIT Raipur'],
+    organizerClub: 'Team Technocracy (Software Wing, NIT Raipur)',
+    officialWebsite: 'https://technocracy.nitrr.ac.in/events',
+    registrationLink: 'https://technocracy.nitrr.ac.in/events',
+    officialVerificationDomain: 'technocracy.nitrr.ac.in',
+    verificationHash: 'SHA256: revcode2026nitrr...technocracy.nitrr.ac.in [OFFICIAL ARENA]',
+    bannerGradient: 'from-emerald-950/90 via-slate-900 to-black',
+    accentColor: '#10B981',
+    coverImage: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1200&q=80',
+    galleryImages: [
+      'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1000&q=80',
+      'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1000&q=80'
+    ],
+    videoTeaser: {
+      title: 'Reverse Coding Black-Box Logic Arena — NIT Raipur',
+      embedUrl: 'https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ',
+      previewUrl: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1200&q=80',
+      duration: '02:30',
+      organizer: 'Team Technocracy NITRR',
+      views: '11,200+ views'
+    },
+    isFeatured: false,
+    isHot: true,
+    highlights: [
+      'Black box executable binaries provided with zero documentation',
+      'Participants feed custom inputs, observe outputs, and reverse engineer code structure',
+      'Tests deep mathematical intuition, edge case reasoning, and algorithmic logic'
+    ],
+    description: 'Reverse Coding is a renowned competition where participants receive compiled binaries or black-box APIs, working purely backward from input/output behaviors to reconstruct the exact hidden algorithms.',
+    schedule: [
+      { time: '02:45 PM', activity: 'CCC Lab Terminal Login & Binary Distribution' },
+      { time: '03:00 PM', activity: 'Round 1: 5 Black-Box Mathematical Systems' },
+      { time: '04:15 PM', activity: 'Round 2: Obfuscated Data Structure Reconstructions' }
+    ],
+    prizes: [
+      { rank: 'Master Reverse Engineer', amount: '₹18,000', perks: 'Winner Plaque + Binary Hacker Toolkit' },
+      { rank: 'Runner Up', amount: '₹11,000', perks: 'Silver Trophy' },
+      { rank: 'Highest Precision Score', amount: '₹6,000', perks: 'Logic Pioneer Certificate' }
+    ],
+    contactEmail: 'reversecode@technocracy.nitrr.ac.in',
+    contactPhone: '+91 771 2254200'
+  },
+  {
+    id: 'nitrr-valorant-lan',
+    title: 'VALORANT LAN TOURNAMENT — Central India Esports Championship',
+    tagline: '1 Gbps Optical Fiber LAN Arena: 5v5 Competitive Tactical FPS Championship',
+    bannerArtTitle: 'VALORANT TOURNAMENT',
+    category: 'Esports',
+    college: 'National Institute of Technology (NIT), Raipur',
+    shortCollege: 'NIT Raipur',
+    city: 'Raipur, Chhattisgarh',
+    isRegional: true,
+    venue: 'Central Computer Center (CCC), NIT Raipur',
+    venueCode: 'CCC',
+    time: '2:30 PM onwards',
+    mode: 'On-Campus',
+    startDate: 'Feb 01, 2026',
+    endDate: 'Feb 02, 2026',
+    deadline: 'Jan 31, 2026',
+    prizePool: '₹40,000',
+    entryFee: 'Nominal Squad Fee',
+    registeredCount: 320,
+    maxSlots: 400,
+    teamSize: '5 Members',
+    tags: ['Valorant', 'Esports', 'LAN Gaming', '1 Gbps Fiber', 'CCC Lab', 'NIT Raipur'],
+    organizerClub: 'Team Technocracy (Gaming Wing, NIT Raipur)',
+    officialWebsite: 'https://technocracy.nitrr.ac.in/events',
+    registrationLink: 'https://technocracy.nitrr.ac.in/events',
+    officialVerificationDomain: 'technocracy.nitrr.ac.in',
+    verificationHash: 'SHA256: valo2026nitrr...technocracy.nitrr.ac.in [OFFICIAL ARENA]',
+    bannerGradient: 'from-pink-950/90 via-slate-900 to-black',
+    accentColor: '#EC4899',
+    coverImage: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1200&q=80',
+    galleryImages: [
+      'https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=1000&q=80',
+      'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1000&q=80'
+    ],
+    videoTeaser: {
+      title: 'Valorant LAN Finals Shoutcast & Clutch Highlights — NIT Raipur',
+      embedUrl: 'https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ',
+      previewUrl: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1200&q=80',
+      duration: '04:00',
+      organizer: 'Team Technocracy NITRR',
+      views: '29,000+ views'
+    },
+    isFeatured: true,
+    isHot: true,
+    highlights: [
+      'High-refresh rate monitors & sub-1ms dedicated LAN routing inside CCC Lab',
+      'Live shoutcasting with projector stream for spectators in the main gallery',
+      'Official tournament rulebook following Riot Games competitive guidelines'
+    ],
+    description: 'Central India’s premier 5v5 collegiate LAN Valorant tournament featuring best-of-3 bracket eliminations, anti-cheat hardware checks, and professional shoutcasting.',
+    schedule: [
+      { time: '01:30 PM', activity: 'Warmup & Ping Calibration in CCC Lab' },
+      { time: '02:30 PM', activity: 'Round of 16 Single Elimination Brackets' },
+      { time: '06:00 PM', activity: 'Grand Finals Best-of-3 Broadcast' }
+    ],
+    prizes: [
+      { rank: 'Grand LAN Champion (Team of 5)', amount: '₹25,000', perks: 'Pro Gaming Headsets + Champions Trophy' },
+      { rank: '1st Runner Up Squad', amount: '₹12,000', perks: 'Esports Medals' },
+      { rank: 'Tournament MVP', amount: '₹3,000', perks: 'MVP Plaque + Mechanical Mouse' }
+    ],
+    contactEmail: 'esports@technocracy.nitrr.ac.in',
     contactPhone: '+91 771 2254200'
   },
   {

@@ -9,6 +9,8 @@ import { CommandPalette } from './components/CommandPalette';
 import { FlagshipBento } from './components/FlagshipBento';
 import { CampusMarquee } from './components/CampusMarquee';
 import { TransitGuideModal } from './components/TransitGuideModal';
+import { TechnocracyRail } from './components/TechnocracyRail';
+import { FloatingControls } from './components/FloatingControls';
 import { Compass, ArrowUpRight, ShieldCheck, MapPin } from 'lucide-react';
 
 const GithubIcon = ({ className = "w-3.5 h-3.5" }: { className?: string }) => (
@@ -81,6 +83,17 @@ export function App() {
         eventCount={filteredEvents.length}
       />
 
+      {/* Left Vertical Cyber Rail (Technocracy NIT Raipur Hallmark) */}
+      <TechnocracyRail 
+        onActivateTechnocracyMode={() => {
+          setSelectedCollege('NIT Raipur');
+          setIsRegionalOnly(true);
+        }} 
+      />
+
+      {/* Floating Bottom Navigation Controls */}
+      <FloatingControls />
+
       {/* Main Content Area */}
       <main className="flex-1">
         
@@ -105,13 +118,53 @@ export function App() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
           
           {/* Flagship Feature Banner */}
-          {filteredEvents.length > 0 && (
+          {filteredEvents.length > 0 && selectedCollege === 'All Colleges' && (
             <FlagshipBento
               event={filteredEvents[0]}
               onSelectEvent={(ev) => setSelectedEvent(ev)}
               onOpenTransit={() => setIsTransitOpen(true)}
               onOpenHostModal={() => setIsHostModalOpen(true)}
             />
+          )}
+
+          {/* Dedicated Technocracy NIT Raipur Spotlight Banner */}
+          {selectedCollege === 'NIT Raipur' && (
+            <div className="p-6 rounded-2xl bg-gradient-to-r from-emerald-950/70 via-neutral-900/90 to-[#0A0D18] border border-emerald-500/40 backdrop-blur-xl relative overflow-hidden flex flex-col md:flex-row items-start md:items-center justify-between gap-5 shadow-[0_0_50px_rgba(16,185,129,0.18)] text-left">
+              <div className="relative z-10">
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="px-2.5 py-0.5 rounded text-[10px] font-mono font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                    TEAM TECHNOCRACY • NIT RAIPUR
+                  </span>
+                  <span className="text-xs font-mono text-neutral-400">Aavartan & Vigyaan Symposium</span>
+                </div>
+                <h2 className="font-heading text-xl sm:text-2xl font-black text-white tracking-tight">
+                  Official Technical Arenas & Hackathon Circuits
+                </h2>
+                <p className="text-xs text-neutral-300 mt-1 max-w-xl leading-relaxed">
+                  Direct access to the 12+ official arenas from <code className="text-emerald-400">technocracy.nitrr.ac.in</code>. All dates, CCC Lab & G-4 venues, rulebooks, and deadlines are synchronized with the student committee.
+                </p>
+              </div>
+
+              <div className="relative z-10 flex flex-wrap items-center gap-2.5 shrink-0">
+                <a 
+                  href="https://technocracy.nitrr.ac.in/vigyaan" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="px-3.5 py-2 rounded-xl text-xs font-semibold bg-emerald-400 text-black hover:bg-emerald-300 transition-all font-heading shadow"
+                >
+                  VIGYAAN (SCIENCE EXPO)
+                </a>
+                <a 
+                  href="https://technocracy.nitrr.ac.in/events" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="px-3.5 py-2 rounded-xl text-xs font-mono bg-neutral-800 hover:bg-neutral-700 text-neutral-200 border border-neutral-700 transition-colors flex items-center gap-1.5"
+                >
+                  <span>technocracy.nitrr.ac.in</span>
+                  <ArrowUpRight className="w-3.5 h-3.5 text-emerald-400" />
+                </a>
+              </div>
+            </div>
           )}
 
           {/* Results Status Header */}
