@@ -2,7 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { ArrowUp, Volume2, VolumeX, Sparkles } from 'lucide-react';
 import { haptics } from '../utils/audioHaptics';
 
-export const FloatingControls: React.FC = () => {
+interface FloatingControlsProps {
+  viewMode?: 'story' | 'directory';
+  onToggleMode?: () => void;
+}
+
+export const FloatingControls: React.FC<FloatingControlsProps> = ({ viewMode = 'directory', onToggleMode }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
 
@@ -32,6 +37,21 @@ export const FloatingControls: React.FC = () => {
 
   return (
     <div className="fixed bottom-6 right-6 z-40 flex flex-col items-center gap-3">
+      {/* 3D Story vs Directory Mode Launcher */}
+      {onToggleMode && (
+        <button
+          onClick={() => {
+            haptics.playWarp();
+            onToggleMode();
+          }}
+          className="px-3.5 py-2 rounded-full bg-gradient-to-r from-emerald-500 to-cyan-500 text-black font-mono font-black text-xs shadow-[0_0_25px_rgba(16,185,129,0.4)] hover:scale-105 active:scale-95 transition-all flex items-center gap-2 cursor-pointer border border-emerald-400"
+          title={viewMode === 'story' ? 'Open Fast Directory Grid' : 'Enter Full 3D Cinematic Story Mode'}
+        >
+          <Sparkles className="w-3.5 h-3.5 animate-spin" style={{ animationDuration: '4s' }} />
+          <span>{viewMode === 'story' ? 'DIRECTORY' : '3D FEST STORY'}</span>
+        </button>
+      )}
+
       {/* Audio Haptics Toggle */}
       <button
         onClick={toggleMute}

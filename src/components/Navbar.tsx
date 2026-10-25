@@ -19,6 +19,7 @@ interface NavbarProps {
   isTechnocracyTheme: boolean;
   onToggleTechnocracyTheme: () => void;
   eventCount: number;
+  viewMode?: 'story' | 'directory';
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
@@ -31,6 +32,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   isTechnocracyTheme,
   onToggleTechnocracyTheme,
   eventCount,
+  viewMode = 'directory',
 }) => {
   return (
     <header className="sticky top-0 z-40 w-full border-b border-neutral-800/80 bg-[#06080D]/90 backdrop-blur-xl">
@@ -75,14 +77,14 @@ export const Navbar: React.FC<NavbarProps> = ({
             {/* 3D Story Mode Trigger */}
             <button
               onClick={() => {
-                haptics.playClick();
+                haptics.playWarp();
                 onOpenStory();
               }}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-emerald-500/30 bg-emerald-500/10 hover:bg-emerald-500/20 text-xs font-mono text-emerald-300 transition-colors cursor-pointer shadow-[0_0_15px_rgba(16,185,129,0.15)]"
-              title="Experience Chronicles of Aavartan & Vigyaan in 3D"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-emerald-500/40 bg-emerald-500/15 hover:bg-emerald-500/25 text-xs font-mono text-emerald-300 transition-all cursor-pointer shadow-[0_0_20px_rgba(16,185,129,0.25)]"
+              title={viewMode === 'story' ? 'Switch to Events Directory Grid' : 'Experience 3D Chronicles of Aavartan & Vigyaan'}
             >
-              <Sparkles className="w-3.5 h-3.5 text-emerald-400 animate-spin" style={{ animationDuration: '6s' }} />
-              <span className="hidden sm:inline font-semibold">3D Fest Story</span>
+              <Sparkles className="w-3.5 h-3.5 text-emerald-400 animate-spin" style={{ animationDuration: '5s' }} />
+              <span className="font-bold">{viewMode === 'story' ? '⚡ Open Directory' : '🎬 3D Fest Story'}</span>
             </button>
 
             {/* Celestial Technocracy Theme Toggle */}

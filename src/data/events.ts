@@ -11,7 +11,7 @@ export interface CollegeEvent {
   id: string;
   title: string;
   tagline: string;
-  category: 'Hackathon' | 'Technical' | 'Cultural' | 'Robotics' | 'Workshop' | 'E-Cell' | 'Esports';
+  category: 'Hackathon' | 'Technical' | 'Cultural' | 'Robotics' | 'Workshop' | 'E-Cell' | 'Esports' | 'Fun';
   college: string;
   shortCollege: string;
   city: string;
@@ -468,7 +468,7 @@ export const SAMPLE_EVENTS: CollegeEvent[] = [
     verificationHash: 'SHA256: revcode2026nitrr...technocracy.nitrr.ac.in [OFFICIAL ARENA]',
     bannerGradient: 'from-emerald-950/90 via-slate-900 to-black',
     accentColor: '#10B981',
-    coverImage: 'https://technocracy.nitrr.ac.in/static/media/dsaMarathon.4b42cba622df7da3d0ef.webp',
+    coverImage: 'https://technocracy.nitrr.ac.in/static/media/reverseCoding.0366dce1cd43524121aa.webp',
     galleryImages: [
       'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1000&q=80',
       'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1000&q=80'
@@ -564,6 +564,773 @@ export const SAMPLE_EVENTS: CollegeEvent[] = [
       { rank: 'Tournament MVP', amount: '₹3,000', perks: 'MVP Plaque + Mechanical Mouse' }
     ],
     contactEmail: 'esports@technocracy.nitrr.ac.in',
+    contactPhone: '+91 771 2254200'
+  },
+  {
+    id: 'nitrr-escape-the-matrix',
+    title: 'ESCAPE THE MATRIX — Cryptography & Cyber Treasure Hunt',
+    tagline: 'Decipher Ciphers, Break Steganography & Trace Encrypted Leads Across Campus',
+    bannerArtTitle: 'ESCAPE THE MATRIX',
+    category: 'Technical',
+    college: 'National Institute of Technology (NIT), Raipur',
+    shortCollege: 'NIT Raipur',
+    city: 'Raipur, Chhattisgarh',
+    isRegional: true,
+    venue: 'Department of Computer Science & Main Campus, NIT Raipur',
+    venueCode: 'CS-DEPT',
+    time: '1:00 PM - 4:00 PM',
+    mode: 'On-Campus',
+    startDate: 'Feb 02, 2026',
+    endDate: 'Feb 02, 2026',
+    deadline: 'Jan 31, 2026',
+    prizePool: '₹25,000',
+    entryFee: 'Free',
+    registeredCount: 290,
+    maxSlots: 350,
+    teamSize: '2 - 4 Members',
+    tags: ['Cryptography', 'Cybersecurity', 'Steganography', 'Treasure Hunt', 'NIT Raipur'],
+    organizerClub: 'Team Technocracy (Cyber Wing, NIT Raipur)',
+    officialWebsite: 'https://technocracy.nitrr.ac.in/events',
+    registrationLink: 'https://technocracy.nitrr.ac.in/events',
+    officialVerificationDomain: 'technocracy.nitrr.ac.in',
+    verificationHash: 'SHA256: matrix2026nitrr...technocracy.nitrr.ac.in [OFFICIAL ARENA]',
+    bannerGradient: 'from-emerald-950/90 via-slate-900 to-black',
+    accentColor: '#10B981',
+    coverImage: 'https://technocracy.nitrr.ac.in/static/media/escapeTheMatrix.7a6172c914e7cad786ce.webp',
+    galleryImages: [
+      'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1000&q=80',
+      'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1000&q=80'
+    ],
+    videoTeaser: {
+      title: 'Escape the Matrix Cyber Clue Challenge — Team Technocracy',
+      embedUrl: 'https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ',
+      previewUrl: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1200&q=80',
+      duration: '02:15',
+      organizer: 'Team Technocracy NITRR',
+      views: '9,400+ views'
+    },
+    isFeatured: true,
+    isHot: true,
+    highlights: [
+      'Multi-stage cryptographic puzzles hidden across physical campus coordinates',
+      'Audio frequency decoding, QR binary steganography, and terminal exploit stages',
+      'Real-time automated scoreboard showing squad progress'
+    ],
+    description: 'An adrenaline-filled cyber escape hunt across NIT Raipur campus where squads decipher encoded ciphers, decrypt audio frequencies, and trace clues through digital and physical realms.',
+    schedule: [
+      { time: '12:30 PM', activity: 'Briefing & Terminal Key Exchange' },
+      { time: '01:00 PM', activity: 'Cipher Phase 1: Cryptographic Terminal Unlock' },
+      { time: '03:30 PM', activity: 'Final Vault Extraction & Winner Verification' }
+    ],
+    prizes: [
+      { rank: 'Grand Matrix Breakers', amount: '₹14,000', perks: 'Golden Key Trophy + Hardware Security Keys' },
+      { rank: '1st Runner Up', amount: '₹7,000', perks: 'Silver Plaque' },
+      { rank: 'Fastest Decoder', amount: '₹4,000', perks: 'Cyber Scout Medal' }
+    ],
+    contactEmail: 'matrix@technocracy.nitrr.ac.in',
+    contactPhone: '+91 771 2254200'
+  },
+  {
+    id: 'nitrr-dimensions-autocad',
+    title: 'DIMENSIONS — 3D Computer-Aided Design & Structural Modeling',
+    tagline: 'Precision Drafting & Mechanical Prototyping in AutoCAD & SolidWorks',
+    bannerArtTitle: 'DIMENSIONS',
+    category: 'Technical',
+    college: 'National Institute of Technology (NIT), Raipur',
+    shortCollege: 'NIT Raipur',
+    city: 'Raipur, Chhattisgarh',
+    isRegional: true,
+    venue: 'CAD/CAM Laboratory, Mechanical Department, NIT Raipur',
+    venueCode: 'CAD-LAB',
+    time: '10:00 AM - 1:00 PM',
+    mode: 'On-Campus',
+    startDate: 'Feb 01, 2026',
+    endDate: 'Feb 01, 2026',
+    deadline: 'Jan 31, 2026',
+    prizePool: '₹20,000',
+    entryFee: 'Free',
+    registeredCount: 165,
+    maxSlots: 200,
+    teamSize: 'Solo or Pair',
+    tags: ['CAD', 'AutoCAD', 'SolidWorks', 'Mechanical Design', 'NIT Raipur'],
+    organizerClub: 'Team Technocracy (Mechanical Wing, NIT Raipur)',
+    officialWebsite: 'https://technocracy.nitrr.ac.in/events',
+    registrationLink: 'https://technocracy.nitrr.ac.in/events',
+    officialVerificationDomain: 'technocracy.nitrr.ac.in',
+    verificationHash: 'SHA256: cad2026nitrr...technocracy.nitrr.ac.in [OFFICIAL ARENA]',
+    bannerGradient: 'from-amber-950/90 via-slate-900 to-black',
+    accentColor: '#F59E0B',
+    coverImage: 'https://technocracy.nitrr.ac.in/static/media/dimensionsAutocad.3ff983645ad7618a0a0d.webp',
+    galleryImages: [
+      'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1000&q=80',
+      'https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=1000&q=80'
+    ],
+    videoTeaser: {
+      title: 'Dimensions 3D Modeling & CAD Sprint Highlights — NIT Raipur',
+      embedUrl: 'https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ',
+      previewUrl: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1200&q=80',
+      duration: '02:00',
+      organizer: 'Team Technocracy NITRR',
+      views: '7,100+ views'
+    },
+    isFeatured: false,
+    isHot: true,
+    highlights: [
+      'Industrial-grade 2D orthographic drafting and 3D parametric isometric modeling',
+      'Evaluated by senior mechanical engineering faculty on tolerance accuracy and aesthetics',
+      'Live software workstations equipped with dual displays'
+    ],
+    description: 'An elite technical CAD competition that tests engineers on isometric geometry, parametric constraints, dimensional tolerances, and structural integrity using AutoCAD and SolidWorks.',
+    schedule: [
+      { time: '09:30 AM', activity: 'Workstation Verification & Problem Blueprints' },
+      { time: '10:00 AM', activity: 'Phase 1: 2D Orthographic Projection' },
+      { time: '11:30 AM', activity: 'Phase 2: 3D Isometric Assembly & Stress Simulation' }
+    ],
+    prizes: [
+      { rank: 'Master CAD Designer', amount: '₹10,000', perks: 'Golden Caliper Trophy + Professional 3D Mouse' },
+      { rank: '1st Runner Up', amount: '₹6,000', perks: 'Silver Memento' },
+      { rank: 'Best Aesthetic Render', amount: '₹4,000', perks: 'Design Precision Medal' }
+    ],
+    contactEmail: 'dimensions@technocracy.nitrr.ac.in',
+    contactPhone: '+91 771 2254200'
+  },
+  {
+    id: 'nitrr-ecopolis',
+    title: 'ECOPOLIS — Sustainable Smart Cities & Green Infrastructure',
+    tagline: 'Design Self-Sustaining Green Urban Habitats for Next-Gen India',
+    bannerArtTitle: 'ECOPOLIS',
+    category: 'Technical',
+    college: 'National Institute of Technology (NIT), Raipur',
+    shortCollege: 'NIT Raipur',
+    city: 'Raipur, Chhattisgarh',
+    isRegional: true,
+    venue: 'Department of Civil Engineering & Architecture, NIT Raipur',
+    venueCode: 'CIVIL-AUDI',
+    time: '2:00 PM - 5:00 PM',
+    mode: 'On-Campus',
+    startDate: 'Feb 02, 2026',
+    endDate: 'Feb 02, 2026',
+    deadline: 'Jan 31, 2026',
+    prizePool: '₹25,000',
+    entryFee: 'Free',
+    registeredCount: 140,
+    maxSlots: 180,
+    teamSize: '2 - 4 Members',
+    tags: ['Sustainability', 'Smart Cities', 'Green Tech', 'Civil Engineering', 'NIT Raipur'],
+    organizerClub: 'Team Technocracy (Civil & Environmental Wing, NIT Raipur)',
+    officialWebsite: 'https://technocracy.nitrr.ac.in/events',
+    registrationLink: 'https://technocracy.nitrr.ac.in/events',
+    officialVerificationDomain: 'technocracy.nitrr.ac.in',
+    verificationHash: 'SHA256: ecopolis2026nitrr...technocracy.nitrr.ac.in [OFFICIAL ARENA]',
+    bannerGradient: 'from-emerald-950/90 via-slate-900 to-black',
+    accentColor: '#10B981',
+    coverImage: 'https://technocracy.nitrr.ac.in/static/media/ecopolis.cb8eac6a450fe2a5e412.webp',
+    galleryImages: [
+      'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1000&q=80',
+      'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1000&q=80'
+    ],
+    videoTeaser: {
+      title: 'Ecopolis Sustainable Smart City Showcase — NIT Raipur',
+      embedUrl: 'https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ',
+      previewUrl: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80',
+      duration: '02:30',
+      organizer: 'Team Technocracy NITRR',
+      views: '6,800+ views'
+    },
+    isFeatured: false,
+    isHot: true,
+    highlights: [
+      'Zero net-carbon energy, closed-loop greywater recycling, and EV grid planning',
+      'Physical 3D architectural scale models or detailed digital BIM simulations',
+      'Evaluation by urban town planners and environmental researchers'
+    ],
+    description: 'An architectural and environmental engineering challenge where squads engineer complete sustainable smart city sectors featuring carbon-negative materials, renewable microgrids, and green transport networks.',
+    schedule: [
+      { time: '01:30 PM', activity: 'Model Setup & Digital Blueprint Staging' },
+      { time: '02:00 PM', activity: 'Jury Presentation & Structural Defense' },
+      { time: '04:30 PM', activity: 'Award Declaration & Eco-Pioneer Honors' }
+    ],
+    prizes: [
+      { rank: 'Urban Innovation Winner', amount: '₹13,000', perks: 'Ecopolis Trophy + Green Patent Mentorship' },
+      { rank: '1st Runner Up', amount: '₹8,000', perks: 'Silver Memento' },
+      { rank: 'Best Energy Model', amount: '₹4,000', perks: 'Sustainability Medal' }
+    ],
+    contactEmail: 'ecopolis@technocracy.nitrr.ac.in',
+    contactPhone: '+91 771 2254200'
+  },
+  {
+    id: 'nitrr-pixel-playground',
+    title: 'PIXEL PLAYGROUND — Retro & Indie Game Development Jam',
+    tagline: '24-Hour Physics & Gameplay Coding Sprint in Unity, Godot & Unreal',
+    bannerArtTitle: 'PIXEL PLAYGROUND',
+    category: 'Technical',
+    college: 'National Institute of Technology (NIT), Raipur',
+    shortCollege: 'NIT Raipur',
+    city: 'Raipur, Chhattisgarh',
+    isRegional: true,
+    venue: 'Central Computer Center (CCC Lab), NIT Raipur',
+    venueCode: 'CCC-GAME',
+    time: 'Overnight 24-Hour Sprint',
+    mode: 'On-Campus',
+    startDate: 'Feb 01, 2026',
+    endDate: 'Feb 02, 2026',
+    deadline: 'Jan 31, 2026',
+    prizePool: '₹30,000',
+    entryFee: 'Free',
+    registeredCount: 220,
+    maxSlots: 250,
+    teamSize: '1 - 3 Members',
+    tags: ['Game Dev', 'Unity', 'Godot', 'Unreal', 'Pixel Art', 'NIT Raipur'],
+    organizerClub: 'Team Technocracy (Game Dev Wing, NIT Raipur)',
+    officialWebsite: 'https://technocracy.nitrr.ac.in/events',
+    registrationLink: 'https://technocracy.nitrr.ac.in/events',
+    officialVerificationDomain: 'technocracy.nitrr.ac.in',
+    verificationHash: 'SHA256: pixel2026nitrr...technocracy.nitrr.ac.in [OFFICIAL ARENA]',
+    bannerGradient: 'from-purple-950/90 via-slate-900 to-black',
+    accentColor: '#A855F7',
+    coverImage: 'https://technocracy.nitrr.ac.in/static/media/pixelPlayground.fe8a75f2bf149a7ffdee.webp',
+    galleryImages: [
+      'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1000&q=80',
+      'https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=1000&q=80'
+    ],
+    videoTeaser: {
+      title: 'Pixel Playground 24h Game Jam Teaser — NIT Raipur',
+      embedUrl: 'https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ',
+      previewUrl: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1200&q=80',
+      duration: '02:40',
+      organizer: 'Team Technocracy NITRR',
+      views: '11,000+ views'
+    },
+    isFeatured: true,
+    isHot: true,
+    highlights: [
+      'Surprise theme revealed at kickoff: physics puzzles, roguelikes, or retro platformers',
+      'Full playable web or desktop build submitted before the 24-hour countdown strikes zero',
+      'Playtested live by hundreds of college fest attendees on arcade stations'
+    ],
+    description: 'An exhilarating indie game jam challenging developers and digital artists to construct a fully playable game from scratch in 24 hours featuring custom mechanics, shaders, and retro sound tracks.',
+    schedule: [
+      { time: '10:00 AM', activity: 'Secret Game Theme Reveal & Engine Setup' },
+      { time: '02:00 AM', activity: 'Midnight Physics Checkpoint & Playtest Alpha' },
+      { time: '10:00 AM', activity: 'Final Build Upload & Public Arcade Showcase' }
+    ],
+    prizes: [
+      { rank: 'Best Game Overall', amount: '₹16,000', perks: 'Arcade Master Trophy + Steam Developer Grant' },
+      { rank: 'Best Game Mechanics', amount: '₹9,000', perks: 'Silver Joystick Plaque' },
+      { rank: 'Best Visual Art & Audio', amount: '₹5,000', perks: 'Pixel Artisan Medal' }
+    ],
+    contactEmail: 'gamedev@technocracy.nitrr.ac.in',
+    contactPhone: '+91 771 2254200'
+  },
+  {
+    id: 'nitrr-rocket-rage',
+    title: 'ROCKET RAGE — Hydro-Pneumatic Aeromodelling & Ballistics Challenge',
+    tagline: 'Design, Pressurize & Launch High-Altitude Multi-Stage Water Rockets',
+    bannerArtTitle: 'ROCKET RAGE',
+    category: 'Technical',
+    college: 'National Institute of Technology (NIT), Raipur',
+    shortCollege: 'NIT Raipur',
+    city: 'Raipur, Chhattisgarh',
+    isRegional: true,
+    venue: 'Central Cricket Ground & Open Lawn, NIT Raipur',
+    venueCode: 'CENTRAL-LAWN',
+    time: '11:00 AM - 3:00 PM',
+    mode: 'On-Campus',
+    startDate: 'Feb 02, 2026',
+    endDate: 'Feb 02, 2026',
+    deadline: 'Jan 31, 2026',
+    prizePool: '₹25,000',
+    entryFee: 'Free',
+    registeredCount: 195,
+    maxSlots: 220,
+    teamSize: '2 - 3 Members',
+    tags: ['Aeromodelling', 'Rocketry', 'Water Rocket', 'Fluid Dynamics', 'NIT Raipur'],
+    organizerClub: 'Team Technocracy (Aerospace Wing, NIT Raipur)',
+    officialWebsite: 'https://technocracy.nitrr.ac.in/events',
+    registrationLink: 'https://technocracy.nitrr.ac.in/events',
+    officialVerificationDomain: 'technocracy.nitrr.ac.in',
+    verificationHash: 'SHA256: rocket2026nitrr...technocracy.nitrr.ac.in [OFFICIAL ARENA]',
+    bannerGradient: 'from-amber-950/90 via-slate-900 to-black',
+    accentColor: '#F59E0B',
+    coverImage: 'https://technocracy.nitrr.ac.in/static/media/rocketRage.aed84e8a287aedcd1c1f.webp',
+    galleryImages: [
+      'https://images.unsplash.com/photo-1517976487507-5b3b11329241?auto=format&fit=crop&w=1000&q=80',
+      'https://images.unsplash.com/photo-1541185933-ef5d8ed016c2?auto=format&fit=crop&w=1000&q=80'
+    ],
+    videoTeaser: {
+      title: 'Rocket Rage High Altitude Launch Heats — Central Ground NIT Raipur',
+      embedUrl: 'https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ',
+      previewUrl: 'https://images.unsplash.com/photo-1517976487507-5b3b11329241?auto=format&fit=crop&w=1200&q=80',
+      duration: '02:10',
+      organizer: 'Team Technocracy NITRR',
+      views: '14,500+ views'
+    },
+    isFeatured: true,
+    isHot: true,
+    highlights: [
+      'Hydro-pneumatic propellant rockets reaching 50+ meters vertical apogee',
+      'Target precision landing and maximum airborne time duration categories',
+      'Aerodynamic fin geometry, nosecone balance, and safe deployment parachutes'
+    ],
+    description: 'An exhilarating rocketry competition testing principles of aerodynamics, nozzle fluid pressure, and ballistic trajectory on NIT Raipur’s vast Central Grounds.',
+    schedule: [
+      { time: '10:30 AM', activity: 'Safety Scrutiny & Pressure Vessel Inspection' },
+      { time: '11:00 AM', activity: 'Round 1: Apogee Altitude Launches' },
+      { time: '01:30 PM', activity: 'Round 2: Bulls-Eye Target Spot Landing' }
+    ],
+    prizes: [
+      { rank: 'Aerospace Grand Champion', amount: '₹13,000', perks: 'Titanium Rocket Trophy + Flight Gear' },
+      { rank: '1st Runner Up', amount: '₹8,000', perks: 'Silver Plaque' },
+      { rank: 'Longest Airtime Award', amount: '₹4,000', perks: 'Ballistics Master Medal' }
+    ],
+    contactEmail: 'rocketry@technocracy.nitrr.ac.in',
+    contactPhone: '+91 771 2254200'
+  },
+  {
+    id: 'nitrr-roborace',
+    title: 'ROBORACE — High-Speed All-Terrain Obstacle Circuit',
+    tagline: 'Navigate Steep Ramps, Sand Pits, Oil Slicks & Precision Chicanes',
+    bannerArtTitle: 'ROBO RACE',
+    category: 'Robotics',
+    college: 'National Institute of Technology (NIT), Raipur',
+    shortCollege: 'NIT Raipur',
+    city: 'Raipur, Chhattisgarh',
+    isRegional: true,
+    venue: 'Open Amphitheatre Stage, NIT Raipur',
+    venueCode: 'AMPHI-TRACK',
+    time: '12:00 PM - 4:00 PM',
+    mode: 'On-Campus',
+    startDate: 'Feb 01, 2026',
+    endDate: 'Feb 01, 2026',
+    deadline: 'Jan 31, 2026',
+    prizePool: '₹35,000',
+    entryFee: 'Free',
+    registeredCount: 260,
+    maxSlots: 300,
+    teamSize: '2 - 4 Members',
+    tags: ['RoboRace', 'Robotics', 'Chassis Engineering', 'All Terrain', 'NIT Raipur'],
+    organizerClub: 'Team Technocracy (Robotics Wing, NIT Raipur)',
+    officialWebsite: 'https://technocracy.nitrr.ac.in/events',
+    registrationLink: 'https://technocracy.nitrr.ac.in/events',
+    officialVerificationDomain: 'technocracy.nitrr.ac.in',
+    verificationHash: 'SHA256: roborace2026nitrr...technocracy.nitrr.ac.in [OFFICIAL ARENA]',
+    bannerGradient: 'from-cyan-950/90 via-slate-900 to-black',
+    accentColor: '#06B6D4',
+    coverImage: 'https://technocracy.nitrr.ac.in/static/media/roboRace.3f525f1625ee9f4c3333.webp',
+    galleryImages: [
+      'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=1000&q=80',
+      'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1000&q=80'
+    ],
+    videoTeaser: {
+      title: 'RoboRace Obstacle Track Grand Prix Highlights — NIT Raipur',
+      embedUrl: 'https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ',
+      previewUrl: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=1200&q=80',
+      duration: '03:10',
+      organizer: 'Team Technocracy NITRR',
+      views: '22,400+ views'
+    },
+    isFeatured: true,
+    isHot: true,
+    highlights: [
+      '150-meter extreme all-terrain track with grease zones, suspension bridges, and see-saws',
+      'High-torque motor drivetrain and responsive wireless RF controllers tested',
+      'Electronic sub-millisecond lap-timer sensors at each checkpoint'
+    ],
+    description: 'An adrenaline-charged RC robotic sprint where machines conquer treacherous inclines, gravel pits, and rotating bridge obstacles to claim the fastest lap record.',
+    schedule: [
+      { time: '11:30 AM', activity: 'Track Inspection & Vehicle Dimensions Check' },
+      { time: '12:00 PM', activity: 'Qualifying Heats (Single Lap Timed Trial)' },
+      { time: '02:30 PM', activity: 'Grand Finals 3-Lap Championship Race' }
+    ],
+    prizes: [
+      { rank: 'Grand Track Champion', amount: '₹18,000', perks: 'RoboSpeed Trophy + High-Torque Motor Kits' },
+      { rank: '1st Runner Up', amount: '₹11,000', perks: 'Silver Cup' },
+      { rank: 'Best Suspension Design', amount: '₹6,000', perks: 'Mechanical Innovation Medal' }
+    ],
+    contactEmail: 'roborace@technocracy.nitrr.ac.in',
+    contactPhone: '+91 771 2254200'
+  },
+  {
+    id: 'nitrr-speed-cubing',
+    title: 'SPEED CUBING — WCA Standard Rubik’s Cube Speedclash',
+    tagline: 'Sub-10 Second Hand-Eye Coordination & Finger Speed Solves',
+    bannerArtTitle: 'SPEED CUBING',
+    category: 'Fun',
+    college: 'National Institute of Technology (NIT), Raipur',
+    shortCollege: 'NIT Raipur',
+    city: 'Raipur, Chhattisgarh',
+    isRegional: true,
+    venue: 'Student Activity Center (SAC), NIT Raipur',
+    venueCode: 'SAC-HALL',
+    time: '2:30 PM - 5:00 PM',
+    mode: 'On-Campus',
+    startDate: 'Feb 01, 2026',
+    endDate: 'Feb 01, 2026',
+    deadline: 'Jan 31, 2026',
+    prizePool: '₹15,000',
+    entryFee: 'Free',
+    registeredCount: 180,
+    maxSlots: 220,
+    teamSize: 'Solo',
+    tags: ['Speed Cubing', 'Rubik Cube', 'WCA', 'Brain Sport', 'NIT Raipur'],
+    organizerClub: 'Team Technocracy (Brain Sport Wing, NIT Raipur)',
+    officialWebsite: 'https://technocracy.nitrr.ac.in/events',
+    registrationLink: 'https://technocracy.nitrr.ac.in/events',
+    officialVerificationDomain: 'technocracy.nitrr.ac.in',
+    verificationHash: 'SHA256: cube2026nitrr...technocracy.nitrr.ac.in [OFFICIAL ARENA]',
+    bannerGradient: 'from-amber-950/90 via-slate-900 to-black',
+    accentColor: '#F59E0B',
+    coverImage: 'https://technocracy.nitrr.ac.in/static/media/speedCubing.860a892dfa3c2b61429a.webp',
+    galleryImages: [
+      'https://images.unsplash.com/photo-1591994843349-f415893b3a6b?auto=format&fit=crop&w=1000&q=80',
+      'https://images.unsplash.com/photo-1546776310-eef45dd6d63c?auto=format&fit=crop&w=1000&q=80'
+    ],
+    videoTeaser: {
+      title: 'Speed Cubing Sub-10 Second Clashes — NIT Raipur',
+      embedUrl: 'https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ',
+      previewUrl: 'https://images.unsplash.com/photo-1591994843349-f415893b3a6b?auto=format&fit=crop&w=1200&q=80',
+      duration: '01:50',
+      organizer: 'Team Technocracy NITRR',
+      views: '8,300+ views'
+    },
+    isFeatured: false,
+    isHot: true,
+    highlights: [
+      'Official WCA-compliant StackMat timers and randomized scramble algorithms',
+      'Events across 3x3x3, 2x2x2, and Pyraminx categories',
+      'Electrifying 1v1 head-to-head elimination bracket'
+    ],
+    description: 'A pure test of algorithmic dexterity, pattern recognition, and microsecond fingertip reflexes governed by official World Cube Association regulations.',
+    schedule: [
+      { time: '02:00 PM', activity: 'Cube Inspection & Timer Warmups' },
+      { time: '02:30 PM', activity: 'Preliminary Average-of-5 Rounds' },
+      { time: '04:15 PM', activity: 'Top 8 Head-to-Head Speed Shootout' }
+    ],
+    prizes: [
+      { rank: 'Master Speed Cuber', amount: '₹8,000', perks: 'Golden Cube Trophy + GAN Magnetic Speedcube' },
+      { rank: '1st Runner Up', amount: '₹4,500', perks: 'Silver Plaque' },
+      { rank: 'Fastest Single Solve', amount: '₹2,500', perks: 'Lightning Reflex Medal' }
+    ],
+    contactEmail: 'cubing@technocracy.nitrr.ac.in',
+    contactPhone: '+91 771 2254200'
+  },
+  {
+    id: 'nitrr-workshops',
+    title: 'TECHNICAL WORKSHOPS — Hands-On Embedded IoT, AI & Autonomous Drones',
+    tagline: 'Master Real-World Engineering Hardware Under Industry Mentors',
+    bannerArtTitle: 'WORKSHOPS',
+    category: 'Workshop',
+    college: 'National Institute of Technology (NIT), Raipur',
+    shortCollege: 'NIT Raipur',
+    city: 'Raipur, Chhattisgarh',
+    isRegional: true,
+    venue: 'E-Classroom Complex & Central Seminar Hall, NIT Raipur',
+    venueCode: 'E-CLASS',
+    time: '10:00 AM - 4:00 PM',
+    mode: 'On-Campus',
+    startDate: 'Feb 01, 2026',
+    endDate: 'Feb 02, 2026',
+    deadline: 'Jan 31, 2026',
+    prizePool: '₹10,000 + Hardware Kits',
+    entryFee: 'Free',
+    registeredCount: 340,
+    maxSlots: 400,
+    teamSize: 'Solo',
+    tags: ['Workshop', 'IoT', 'AI', 'Drone Tech', 'Hardware', 'NIT Raipur'],
+    organizerClub: 'Team Technocracy (Workshops Wing, NIT Raipur)',
+    officialWebsite: 'https://technocracy.nitrr.ac.in/events',
+    registrationLink: 'https://technocracy.nitrr.ac.in/events',
+    officialVerificationDomain: 'technocracy.nitrr.ac.in',
+    verificationHash: 'SHA256: workshop2026nitrr...technocracy.nitrr.ac.in [OFFICIAL ARENA]',
+    bannerGradient: 'from-cyan-950/90 via-slate-900 to-black',
+    accentColor: '#06B6D4',
+    coverImage: 'https://technocracy.nitrr.ac.in/static/media/workshop.8c83ec789130de7298cb.webp',
+    galleryImages: [
+      'https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1000&q=80',
+      'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1000&q=80'
+    ],
+    videoTeaser: {
+      title: 'Technocracy Hands-On Hardware & AI Masterclasses — NIT Raipur',
+      embedUrl: 'https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ',
+      previewUrl: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1200&q=80',
+      duration: '02:45',
+      organizer: 'Team Technocracy NITRR',
+      views: '13,800+ views'
+    },
+    isFeatured: false,
+    isHot: true,
+    highlights: [
+      'Physical micro-controller breadboards, sensors, and drone flight controllers supplied',
+      'Hands-on guidance by industrial engineers and senior researchers',
+      'Authorized Certificate of Technical Proficiency issued by NIT Raipur'
+    ],
+    description: 'Intensive practical workshops immersing students in micro-controller firmware programming, computer vision neural model fine-tuning, and brushless motor ESC calibration.',
+    schedule: [
+      { time: '10:00 AM', activity: 'Kit Distribution & Hardware Architecture Overview' },
+      { time: '11:30 AM', activity: 'Guided Hands-On Lab: Interfacing Sensors & Motors' },
+      { time: '02:30 PM', activity: 'Mini-Project Build & Industrial Certification' }
+    ],
+    prizes: [
+      { rank: 'Best Workshop Project', amount: '₹6,000', perks: 'IoT Development Kit + Merit Trophy' },
+      { rank: '1st Runner Up', amount: '₹4,000', perks: 'Hardware Module Bundle' }
+    ],
+    contactEmail: 'workshops@technocracy.nitrr.ac.in',
+    contactPhone: '+91 771 2254200'
+  },
+  {
+    id: 'nitrr-mock-cid',
+    title: 'MOCK CID — Crime Scene Investigation & Forensic Deduction',
+    tagline: 'Analyze Ballistics, Fingerprints & Interrogate Actors to Solve the Mystery',
+    bannerArtTitle: 'MOCK CID',
+    category: 'Fun',
+    college: 'National Institute of Technology (NIT), Raipur',
+    shortCollege: 'NIT Raipur',
+    city: 'Raipur, Chhattisgarh',
+    isRegional: true,
+    venue: 'Department of Mining & Architecture Quad, NIT Raipur',
+    venueCode: 'MINING-QUAD',
+    time: '1:00 PM - 4:30 PM',
+    mode: 'On-Campus',
+    startDate: 'Feb 02, 2026',
+    endDate: 'Feb 02, 2026',
+    deadline: 'Jan 31, 2026',
+    prizePool: '₹20,000',
+    entryFee: 'Free',
+    registeredCount: 310,
+    maxSlots: 350,
+    teamSize: '3 - 5 Members',
+    tags: ['Forensics', 'Deduction', 'Mystery', 'Crime Scene', 'NIT Raipur'],
+    organizerClub: 'Team Technocracy (Deduction Wing, NIT Raipur)',
+    officialWebsite: 'https://technocracy.nitrr.ac.in/events',
+    registrationLink: 'https://technocracy.nitrr.ac.in/events',
+    officialVerificationDomain: 'technocracy.nitrr.ac.in',
+    verificationHash: 'SHA256: cid2026nitrr...technocracy.nitrr.ac.in [OFFICIAL ARENA]',
+    bannerGradient: 'from-amber-950/90 via-slate-900 to-black',
+    accentColor: '#F59E0B',
+    coverImage: 'https://technocracy.nitrr.ac.in/static/media/mockCid.864e2b699b9e9ed8c810.webp',
+    galleryImages: [
+      'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=1000&q=80',
+      'https://images.unsplash.com/photo-1453728013993-6d66e9c9123a?auto=format&fit=crop&w=1000&q=80'
+    ],
+    videoTeaser: {
+      title: 'Mock CID Crime Scene Forensic Challenge — NIT Raipur',
+      embedUrl: 'https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ',
+      previewUrl: 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=1200&q=80',
+      duration: '02:15',
+      organizer: 'Team Technocracy NITRR',
+      views: '16,200+ views'
+    },
+    isFeatured: true,
+    isHot: true,
+    highlights: [
+      'Elaborate staged crime scene with physical forensics evidence, chemical traces, and alibis',
+      'Live actors playing suspects who give conflicting witness statements',
+      'Evaluated on logical coherence, motive deduction, and physical proof assembly'
+    ],
+    description: 'Step into the shoes of ACP Pradyuman in this cult campus favorite where squads investigate staged crime scenes, analyze fingerprint latents, cross-examine suspects, and unravel the mastermind.',
+    schedule: [
+      { time: '12:30 PM', activity: 'Case File Briefing & Detective Badge Issuance' },
+      { time: '01:00 PM', activity: 'Crime Scene Forensics & Evidence Collection' },
+      { time: '03:30 PM', activity: 'Suspect Interrogations & Final Courtroom Accusation' }
+    ],
+    prizes: [
+      { rank: 'Chief Detective Squad', amount: '₹11,000', perks: 'Golden Magnifying Glass Trophy + Detective Trench Coats' },
+      { rank: '1st Runner Up', amount: '₹6,000', perks: 'Silver Plaque' },
+      { rank: 'Sharpest Deduction Award', amount: '₹3,000', perks: 'Forensic Precision Medal' }
+    ],
+    contactEmail: 'mockcid@technocracy.nitrr.ac.in',
+    contactPhone: '+91 771 2254200'
+  },
+  {
+    id: 'nitrr-cornhole',
+    title: 'CORNHOLE CLASH — Precision Target Throwing Championship',
+    tagline: 'Tactical Trajectory & Pressure Scoring on Central Lawn',
+    bannerArtTitle: 'CORNHOLE',
+    category: 'Fun',
+    college: 'National Institute of Technology (NIT), Raipur',
+    shortCollege: 'NIT Raipur',
+    city: 'Raipur, Chhattisgarh',
+    isRegional: true,
+    venue: 'Central Lawn & Festival Carnival Grounds, NIT Raipur',
+    venueCode: 'CARNIVAL-LAWN',
+    time: '3:00 PM - 6:00 PM',
+    mode: 'On-Campus',
+    startDate: 'Feb 01, 2026',
+    endDate: 'Feb 01, 2026',
+    deadline: 'Jan 31, 2026',
+    prizePool: '₹12,000',
+    entryFee: 'Free',
+    registeredCount: 150,
+    maxSlots: 180,
+    teamSize: 'Pair (2 Members)',
+    tags: ['Cornhole', 'Lawn Game', 'Precision', 'Carnival', 'NIT Raipur'],
+    organizerClub: 'Team Technocracy (Carnival Wing, NIT Raipur)',
+    officialWebsite: 'https://technocracy.nitrr.ac.in/events',
+    registrationLink: 'https://technocracy.nitrr.ac.in/events',
+    officialVerificationDomain: 'technocracy.nitrr.ac.in',
+    verificationHash: 'SHA256: cornhole2026nitrr...technocracy.nitrr.ac.in [OFFICIAL ARENA]',
+    bannerGradient: 'from-amber-950/90 via-slate-900 to-black',
+    accentColor: '#F59E0B',
+    coverImage: 'https://technocracy.nitrr.ac.in/static/media/cornhole.40c151a4a7db08c9791c.webp',
+    galleryImages: [
+      'https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=1000&q=80',
+      'https://images.unsplash.com/photo-1546776310-eef45dd6d63c?auto=format&fit=crop&w=1000&q=80'
+    ],
+    videoTeaser: {
+      title: 'Cornhole Festival Tournament Highlights — NIT Raipur',
+      embedUrl: 'https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ',
+      previewUrl: 'https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=1200&q=80',
+      duration: '01:30',
+      organizer: 'Team Technocracy NITRR',
+      views: '5,900+ views'
+    },
+    isFeatured: false,
+    isHot: true,
+    highlights: [
+      'Standard 27-foot regulation tournament boards and dual-sided slide/stick bags',
+      'Bracket knockout format with lively crowd commentary and music',
+      'Fast-paced tactical cancel-scoring'
+    ],
+    description: 'A classic carnival precision target clash where duo teams pitch bean bags onto inclined wooden boards, aiming for 3-point hole-in-ones and strategic blocking maneuvers.',
+    schedule: [
+      { time: '02:30 PM', activity: 'Warmup Practice Throws on Central Lawn' },
+      { time: '03:00 PM', activity: 'Bracket Round of 32 Matches' },
+      { time: '05:15 PM', activity: 'Championship Final Throwdown' }
+    ],
+    prizes: [
+      { rank: 'Cornhole Champions', amount: '₹7,000', perks: 'Golden Board Trophy + Carnival Kits' },
+      { rank: '1st Runner Up', amount: '₹3,500', perks: 'Silver Medal' },
+      { rank: 'Most Hole-In-Ones', amount: '₹1,500', perks: 'Precision Toss Medal' }
+    ],
+    contactEmail: 'cornhole@technocracy.nitrr.ac.in',
+    contactPhone: '+91 771 2254200'
+  },
+  {
+    id: 'nitrr-open-mic',
+    title: 'OPEN MIC & COMEDY CLUB — Poetry, Standup & Acoustic Live Jam',
+    tagline: 'Unleash Campus Wit, Acoustic Chords & Expressive Poetry',
+    bannerArtTitle: 'OPEN MIC',
+    category: 'Cultural',
+    college: 'National Institute of Technology (NIT), Raipur',
+    shortCollege: 'NIT Raipur',
+    city: 'Raipur, Chhattisgarh',
+    isRegional: true,
+    venue: 'Open-Air Amphitheatre, NIT Raipur',
+    venueCode: 'AMPHI-STAGE',
+    time: '5:00 PM - 8:00 PM',
+    mode: 'On-Campus',
+    startDate: 'Feb 01, 2026',
+    endDate: 'Feb 01, 2026',
+    deadline: 'Jan 31, 2026',
+    prizePool: '₹15,000',
+    entryFee: 'Free',
+    registeredCount: 140,
+    maxSlots: 160,
+    teamSize: 'Solo or Duo',
+    tags: ['Open Mic', 'Standup Comedy', 'Poetry', 'Acoustic', 'NIT Raipur'],
+    organizerClub: 'Team Technocracy (Cultural & Arts Wing, NIT Raipur)',
+    officialWebsite: 'https://technocracy.nitrr.ac.in/events',
+    registrationLink: 'https://technocracy.nitrr.ac.in/events',
+    officialVerificationDomain: 'technocracy.nitrr.ac.in',
+    verificationHash: 'SHA256: openmic2026nitrr...technocracy.nitrr.ac.in [OFFICIAL ARENA]',
+    bannerGradient: 'from-purple-950/90 via-slate-900 to-black',
+    accentColor: '#A855F7',
+    coverImage: 'https://technocracy.nitrr.ac.in/static/media/openMic.7c9a06f0fc409e5070fe.webp',
+    galleryImages: [
+      'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=1000&q=80',
+      'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=1000&q=80'
+    ],
+    videoTeaser: {
+      title: 'Aavartan Open Mic Sunset Sessions — NIT Raipur',
+      embedUrl: 'https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ',
+      previewUrl: 'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=1200&q=80',
+      duration: '02:50',
+      organizer: 'Team Technocracy NITRR',
+      views: '11,400+ views'
+    },
+    isFeatured: false,
+    isHot: true,
+    highlights: [
+      'Sunset stage in the Open-Air Amphitheatre with professional warm acoustic illumination',
+      'Stand-up comedy, slam poetry, and unplugged vocal performances',
+      'Celebrity comedian guest jury feedback'
+    ],
+    description: 'An enchanting evening stage giving voice to campus poets, storytellers, comedians, and indie musicians under the open skies of NIT Raipur.',
+    schedule: [
+      { time: '04:30 PM', activity: 'Soundcheck & Acoustic Mic Calibration' },
+      { time: '05:00 PM', activity: 'Part 1: Slam Poetry & Hindi Kavita' },
+      { time: '06:30 PM', activity: 'Part 2: Stand-Up Comedy & Acoustic Live Jam' }
+    ],
+    prizes: [
+      { rank: 'Golden Mic Artist', amount: '₹8,000', perks: 'Golden Microphone Plaque + Feature on Official Stream' },
+      { rank: '1st Runner Up', amount: '₹4,500', perks: 'Silver Trophy' },
+      { rank: 'Crowd Favorite', amount: '₹2,500', perks: 'Audience Choice Medal' }
+    ],
+    contactEmail: 'openmic@technocracy.nitrr.ac.in',
+    contactPhone: '+91 771 2254200'
+  },
+  {
+    id: 'nitrr-mega-jenga',
+    title: 'MEGA JENGA — Structural Equilibrium & High-Stakes Tower Physics',
+    tagline: 'Carefully Extract Massive Wooden Beams Without Collapsing the Monument',
+    bannerArtTitle: 'MEGA JENGA',
+    category: 'Fun',
+    college: 'National Institute of Technology (NIT), Raipur',
+    shortCollege: 'NIT Raipur',
+    city: 'Raipur, Chhattisgarh',
+    isRegional: true,
+    venue: 'Central Lawn Carnival Arena, NIT Raipur',
+    venueCode: 'CARNIVAL-LAWN',
+    time: '1:30 PM - 4:00 PM',
+    mode: 'On-Campus',
+    startDate: 'Feb 02, 2026',
+    endDate: 'Feb 02, 2026',
+    deadline: 'Jan 31, 2026',
+    prizePool: '₹10,000',
+    entryFee: 'Free',
+    registeredCount: 175,
+    maxSlots: 200,
+    teamSize: 'Solo or Pair',
+    tags: ['Mega Jenga', 'Physics', 'Carnival', 'Structural Balance', 'NIT Raipur'],
+    organizerClub: 'Team Technocracy (Carnival Wing, NIT Raipur)',
+    officialWebsite: 'https://technocracy.nitrr.ac.in/events',
+    registrationLink: 'https://technocracy.nitrr.ac.in/events',
+    officialVerificationDomain: 'technocracy.nitrr.ac.in',
+    verificationHash: 'SHA256: jenga2026nitrr...technocracy.nitrr.ac.in [OFFICIAL ARENA]',
+    bannerGradient: 'from-amber-950/90 via-slate-900 to-black',
+    accentColor: '#F59E0B',
+    coverImage: 'https://technocracy.nitrr.ac.in/static/media/jenga.efb8b46c6335bfeb5606.webp',
+    galleryImages: [
+      'https://images.unsplash.com/photo-1546776310-eef45dd6d63c?auto=format&fit=crop&w=1000&q=80',
+      'https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=1000&q=80'
+    ],
+    videoTeaser: {
+      title: 'Mega Jenga 6-Foot Tower Topple Moments — NIT Raipur',
+      embedUrl: 'https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ',
+      previewUrl: 'https://images.unsplash.com/photo-1546776310-eef45dd6d63c?auto=format&fit=crop&w=1200&q=80',
+      duration: '01:40',
+      organizer: 'Team Technocracy NITRR',
+      views: '7,800+ views'
+    },
+    isFeatured: false,
+    isHot: true,
+    highlights: [
+      'Tower stacks to over 6 feet in height with heavyweight polished timber blocks',
+      '60-second shot clocks for tension-filled extraction and placement on top',
+      'Exciting crowd countdowns with slow-motion topple replays'
+    ],
+    description: 'A colossal test of nerve, friction physics, and center-of-gravity calculation where players extract oversized blocks from a towering wooden monument without causing a disastrous collapse.',
+    schedule: [
+      { time: '01:00 PM', activity: 'Tower Staging & Rule Demonstration' },
+      { time: '01:30 PM', activity: 'Round 1: 1v1 Fast-Paced Tower Heats' },
+      { time: '03:15 PM', activity: 'Final Tower of Doom Sudden Death' }
+    ],
+    prizes: [
+      { rank: 'Master of Equilibrium', amount: '₹5,500', perks: 'Golden Timber Trophy + Jenga Custom Set' },
+      { rank: '1st Runner Up', amount: '₹3,000', perks: 'Silver Plaque' },
+      { rank: 'Highest Tower Height', amount: '₹1,500', perks: 'Gravity Master Medal' }
+    ],
+    contactEmail: 'jenga@technocracy.nitrr.ac.in',
     contactPhone: '+91 771 2254200'
   },
   {
@@ -1013,5 +1780,6 @@ export const CATEGORY_LIST = [
   'Robotics',
   'Workshop',
   'Cultural',
-  'Esports'
+  'Esports',
+  'Fun'
 ];

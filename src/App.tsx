@@ -12,7 +12,8 @@ import { TransitGuideModal } from './components/TransitGuideModal';
 import { TechnocracyRail } from './components/TechnocracyRail';
 import { FloatingControls } from './components/FloatingControls';
 import { AavartanStoryExperience } from './components/AavartanStoryExperience';
-import { Compass, ArrowUpRight, ShieldCheck, MapPin } from 'lucide-react';
+import { TechnocracyStoryUniverse } from './components/TechnocracyStoryUniverse';
+import { Compass, ArrowUpRight, ShieldCheck, MapPin, Sparkles, Layers } from 'lucide-react';
 
 const GithubIcon = ({ className = "w-3.5 h-3.5" }: { className?: string }) => (
   <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -33,6 +34,7 @@ export function App() {
   const [isTransitOpen, setIsTransitOpen] = useState<boolean>(false);
   const [isStoryOpen, setIsStoryOpen] = useState<boolean>(false);
   const [isTechnocracyTheme, setIsTechnocracyTheme] = useState<boolean>(true);
+  const [viewMode, setViewMode] = useState<'story' | 'directory'>('story'); // Default to Full-Screen 3D Story Universe!
 
   // Filter events based on active controls
   const filteredEvents = useMemo(() => {
@@ -74,244 +76,251 @@ export function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#06080D] text-[#E2E8F0] flex flex-col font-sans selection:bg-emerald-500/30 selection:text-emerald-300 relative">
-      
-      {/* Technocracy NIT Raipur Celestial Sky & Fest Atmosphere Layer */}
-      {isTechnocracyTheme && (
-        <div 
-          className="fixed inset-0 pointer-events-none z-0 opacity-20 filter brightness-90 bg-cover bg-center transition-opacity duration-1000"
-          style={{ backgroundImage: `url('https://technocracy.nitrr.ac.in/static/media/event.91b5ee11360ca6c1e5c2.webp')` }}
+    <>
+      {viewMode === 'story' ? (
+        <TechnocracyStoryUniverse
+          onSelectEvent={(ev) => setSelectedEvent(ev)}
+          onSwitchToDirectory={() => setViewMode('directory')}
         />
-      )}
-
-      {/* Top Navigation */}
-      <Navbar
-        isRegionalOnly={isRegionalOnly}
-        setIsRegionalOnly={setIsRegionalOnly}
-        onOpenHostModal={() => setIsHostModalOpen(true)}
-        onOpenCommandPalette={() => setIsCommandPaletteOpen(true)}
-        onOpenTransit={() => setIsTransitOpen(true)}
-        onOpenStory={() => setIsStoryOpen(true)}
-        isTechnocracyTheme={isTechnocracyTheme}
-        onToggleTechnocracyTheme={() => setIsTechnocracyTheme(!isTechnocracyTheme)}
-        eventCount={filteredEvents.length}
-      />
-
-      {/* Left Vertical Cyber Rail (Technocracy NIT Raipur Hallmark) */}
-      <TechnocracyRail 
-        onActivateTechnocracyMode={() => {
-          setSelectedCollege('NIT Raipur');
-          setIsRegionalOnly(true);
-        }} 
-      />
-
-      {/* Floating Bottom Navigation Controls */}
-      <FloatingControls />
-
-      {/* Main Content Area */}
-      <main className="flex-1">
-        
-        {/* Hero Section */}
-        <HeroSection
-          searchQuery={searchQuery}
-          setSearchQuery={setSearchQuery}
-          selectedCategory={selectedCategory}
-          setSelectedCategory={setSelectedCategory}
-          selectedCollege={selectedCollege}
-          setSelectedCollege={setSelectedCollege}
-          collegeList={COLLEGE_LIST}
-          categoryList={CATEGORY_LIST}
-          totalPrizePool={totalPrizePoolFormatted}
-          totalEvents={filteredEvents.length}
-        />
-
-        {/* Kinetic Campus Accreditation Ribbon */}
-        <CampusMarquee onSelectCollege={(col) => setSelectedCollege(col)} />
-
-        {/* Directory Container */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
+      ) : (
+        <div className="min-h-screen bg-[#06080D] text-[#E2E8F0] flex flex-col font-sans selection:bg-emerald-500/30 selection:text-emerald-300 relative">
           
-          {/* Flagship Feature Banner */}
-          {filteredEvents.length > 0 && selectedCollege === 'All Colleges' && (
-            <FlagshipBento
-              event={filteredEvents[0]}
-              onSelectEvent={(ev) => setSelectedEvent(ev)}
-              onOpenTransit={() => setIsTransitOpen(true)}
-              onOpenHostModal={() => setIsHostModalOpen(true)}
+          {/* Technocracy NIT Raipur Celestial Sky & Fest Atmosphere Layer */}
+          {isTechnocracyTheme && (
+            <div 
+              className="fixed inset-0 pointer-events-none z-0 opacity-20 filter brightness-90 bg-cover bg-center transition-opacity duration-1000"
+              style={{ backgroundImage: `url('https://technocracy.nitrr.ac.in/static/media/event.91b5ee11360ca6c1e5c2.webp')` }}
             />
           )}
 
-          {/* Dedicated Technocracy NIT Raipur Spotlight Banner */}
-          {selectedCollege === 'NIT Raipur' && (
-            <div className="p-6 rounded-2xl bg-gradient-to-r from-emerald-950/70 via-neutral-900/90 to-[#0A0D18] border border-emerald-500/40 backdrop-blur-xl relative overflow-hidden flex flex-col md:flex-row items-start md:items-center justify-between gap-5 shadow-[0_0_50px_rgba(16,185,129,0.18)] text-left">
-              <div className="relative z-10">
-                <div className="flex items-center gap-2 mb-2">
-                  <span className="px-2.5 py-0.5 rounded text-[10px] font-mono font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
-                    TEAM TECHNOCRACY • NIT RAIPUR
-                  </span>
-                  <span className="text-xs font-mono text-neutral-400">Aavartan & Vigyaan Symposium</span>
-                </div>
-                <h2 className="font-heading text-xl sm:text-2xl font-black text-white tracking-tight">
-                  Official Technical Arenas & Hackathon Circuits
-                </h2>
-                <p className="text-xs text-neutral-300 mt-1 max-w-xl leading-relaxed">
-                  Direct access to the 12+ official arenas from <code className="text-emerald-400">technocracy.nitrr.ac.in</code>. All dates, CCC Lab & G-4 venues, rulebooks, and deadlines are synchronized with the student committee.
-                </p>
-              </div>
+          {/* Top Navigation */}
+          <Navbar
+            isRegionalOnly={isRegionalOnly}
+            setIsRegionalOnly={setIsRegionalOnly}
+            onOpenHostModal={() => setIsHostModalOpen(true)}
+            onOpenCommandPalette={() => setIsCommandPaletteOpen(true)}
+            onOpenTransit={() => setIsTransitOpen(true)}
+            onOpenStory={() => setViewMode('story')}
+            isTechnocracyTheme={isTechnocracyTheme}
+            onToggleTechnocracyTheme={() => setIsTechnocracyTheme(!isTechnocracyTheme)}
+            eventCount={filteredEvents.length}
+            viewMode={viewMode}
+          />
 
-              <div className="relative z-10 flex flex-wrap items-center gap-2.5 shrink-0">
-                <a 
-                  href="https://technocracy.nitrr.ac.in/vigyaan" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="px-3.5 py-2 rounded-xl text-xs font-semibold bg-emerald-400 text-black hover:bg-emerald-300 transition-all font-heading shadow"
-                >
-                  VIGYAAN (SCIENCE EXPO)
-                </a>
-                <a 
-                  href="https://technocracy.nitrr.ac.in/events" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="px-3.5 py-2 rounded-xl text-xs font-mono bg-neutral-800 hover:bg-neutral-700 text-neutral-200 border border-neutral-700 transition-colors flex items-center gap-1.5"
-                >
-                  <span>technocracy.nitrr.ac.in</span>
-                  <ArrowUpRight className="w-3.5 h-3.5 text-emerald-400" />
-                </a>
-              </div>
-            </div>
-          )}
+          {/* Left Vertical Cyber Rail (Technocracy NIT Raipur Hallmark) */}
+          <TechnocracyRail 
+            onActivateTechnocracyMode={() => {
+              setViewMode('story');
+            }} 
+          />
 
-          {/* Results Status Header */}
-          <div className="flex items-center justify-between gap-4 pt-2 border-t border-neutral-800">
-            <div className="flex items-center gap-2">
-              <span className="text-xs font-mono uppercase tracking-wider text-neutral-400">Directory Results</span>
-              <span className="px-2 py-0.5 rounded text-xs font-mono font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                {filteredEvents.length} Verified Symposia
-              </span>
-              {isRegionalOnly && (
-                <span className="hidden sm:inline-flex items-center gap-1 text-xs font-mono text-cyan-400">
-                  • Filtered for Raipur & Central India Hub
-                </span>
-              )}
-            </div>
+          {/* Floating Bottom Navigation Controls */}
+          <FloatingControls
+            viewMode={viewMode}
+            onToggleMode={() => setViewMode('story')}
+          />
 
-            <div className="flex items-center gap-2">
-              <button 
-                onClick={() => setIsHostModalOpen(true)}
-                className="text-xs font-mono text-neutral-400 hover:text-emerald-400 transition-colors flex items-center gap-1 cursor-pointer"
-              >
-                <span>Add Your College Fest</span>
-                <ArrowUpRight className="w-3.5 h-3.5" />
-              </button>
-            </div>
-          </div>
+          {/* Main Content Area */}
+          <main className="flex-1">
+            
+            {/* Hero Section */}
+            <HeroSection
+              searchQuery={searchQuery}
+              setSearchQuery={setSearchQuery}
+              selectedCategory={selectedCategory}
+              setSelectedCategory={setSelectedCategory}
+              selectedCollege={selectedCollege}
+              setSelectedCollege={setSelectedCollege}
+              collegeList={COLLEGE_LIST}
+              categoryList={CATEGORY_LIST}
+              totalPrizePool={totalPrizePoolFormatted}
+              totalEvents={filteredEvents.length}
+            />
 
-          {/* Event Cards Grid */}
-          {filteredEvents.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-              {filteredEvents.map((event) => (
-                <EventCard
-                  key={event.id}
-                  event={event}
-                  onSelect={(ev) => setSelectedEvent(ev)}
+            {/* Kinetic Campus Accreditation Ribbon */}
+            <CampusMarquee onSelectCollege={(col) => setSelectedCollege(col)} />
+
+            {/* Directory Container */}
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
+              
+              {/* Flagship Feature Banner */}
+              {filteredEvents.length > 0 && selectedCollege === 'All Colleges' && (
+                <FlagshipBento
+                  event={filteredEvents[0]}
+                  onSelectEvent={(ev) => setSelectedEvent(ev)}
+                  onOpenTransit={() => setIsTransitOpen(true)}
+                  onOpenHostModal={() => setIsHostModalOpen(true)}
                 />
-              ))}
+              )}
+
+              {/* Dedicated Technocracy NIT Raipur Spotlight Banner */}
+              {selectedCollege === 'NIT Raipur' && (
+                <div className="p-6 rounded-2xl bg-gradient-to-r from-emerald-950/70 via-neutral-900/90 to-[#0A0D18] border border-emerald-500/40 backdrop-blur-xl relative overflow-hidden flex flex-col md:flex-row items-start md:items-center justify-between gap-5 shadow-[0_0_50px_rgba(16,185,129,0.18)] text-left">
+                  <div className="relative z-10">
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="px-2.5 py-0.5 rounded text-[10px] font-mono font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                        TEAM TECHNOCRACY • NIT RAIPUR
+                      </span>
+                      <span className="text-xs font-mono text-neutral-400">Aavartan & Vigyaan Symposium</span>
+                    </div>
+                    <h2 className="font-heading text-xl sm:text-2xl font-black text-white tracking-tight">
+                      Official Technical Arenas & Hackathon Circuits
+                    </h2>
+                    <p className="text-xs text-neutral-300 mt-1 max-w-xl leading-relaxed">
+                      Direct access to the 19+ official arenas from <code className="text-emerald-400">technocracy.nitrr.ac.in</code>. All dates, CCC Lab & G-4 venues, rulebooks, and deadlines are synchronized with the student committee.
+                    </p>
+                  </div>
+
+                  <div className="relative z-10 flex flex-wrap items-center gap-2.5 shrink-0">
+                    <button 
+                      onClick={() => setViewMode('story')}
+                      className="px-3.5 py-2 rounded-xl text-xs font-semibold bg-emerald-400 text-black hover:bg-emerald-300 transition-all font-heading shadow flex items-center gap-1.5 cursor-pointer"
+                    >
+                      <Sparkles className="w-3.5 h-3.5" />
+                      <span>3D FEST CHRONICLES</span>
+                    </button>
+                    <a 
+                      href="https://technocracy.nitrr.ac.in/events" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="px-3.5 py-2 rounded-xl text-xs font-mono bg-neutral-800 hover:bg-neutral-700 text-neutral-200 border border-neutral-700 transition-colors flex items-center gap-1.5"
+                    >
+                      <span>technocracy.nitrr.ac.in</span>
+                      <ArrowUpRight className="w-3.5 h-3.5 text-emerald-400" />
+                    </a>
+                  </div>
+                </div>
+              )}
+
+              {/* Results Status Header */}
+              <div className="flex items-center justify-between gap-4 pt-2 border-t border-neutral-800">
+                <div className="flex items-center gap-2">
+                  <span className="text-xs font-mono uppercase tracking-wider text-neutral-400">Directory Results</span>
+                  <span className="px-2 py-0.5 rounded text-xs font-mono font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                    {filteredEvents.length} Verified Symposia
+                  </span>
+                  {isRegionalOnly && (
+                    <span className="hidden sm:inline-flex items-center gap-1 text-xs font-mono text-cyan-400">
+                      • Filtered for Raipur & Central India Hub
+                    </span>
+                  )}
+                </div>
+
+                <div className="flex items-center gap-2">
+                  <button 
+                    onClick={() => setIsHostModalOpen(true)}
+                    className="text-xs font-mono text-neutral-400 hover:text-emerald-400 transition-colors flex items-center gap-1 cursor-pointer"
+                  >
+                    <span>Add Your College Fest</span>
+                    <ArrowUpRight className="w-3.5 h-3.5" />
+                  </button>
+                </div>
+              </div>
+
+              {/* Event Cards Grid */}
+              {filteredEvents.length > 0 ? (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                  {filteredEvents.map((event) => (
+                    <EventCard
+                      key={event.id}
+                      event={event}
+                      onSelect={(ev) => setSelectedEvent(ev)}
+                    />
+                  ))}
+                </div>
+              ) : (
+                <div className="text-center py-16 p-8 rounded-2xl bg-neutral-900/40 border border-neutral-800 max-w-lg mx-auto">
+                  <Compass className="w-10 h-10 text-neutral-500 mx-auto mb-3" />
+                  <h3 className="font-heading text-lg font-bold text-white mb-1">No matching campus events found</h3>
+                  <p className="text-xs text-neutral-400 mb-4">
+                    Try clearing your search query, selecting "All Categories", or toggling All India events on.
+                  </p>
+                  <button
+                    onClick={() => {
+                      setSearchQuery('');
+                      setSelectedCategory('All Categories');
+                      setSelectedCollege('All Colleges');
+                      setIsRegionalOnly(false);
+                    }}
+                    className="px-4 py-2 rounded-xl text-xs font-semibold bg-emerald-400 text-black hover:bg-emerald-300 transition-colors cursor-pointer font-heading"
+                  >
+                    Reset All Filters
+                  </button>
+                </div>
+              )}
+
             </div>
-          ) : (
-            <div className="text-center py-16 p-8 rounded-2xl bg-neutral-900/40 border border-neutral-800 max-w-lg mx-auto">
-              <Compass className="w-10 h-10 text-neutral-500 mx-auto mb-3" />
-              <h3 className="font-heading text-lg font-bold text-white mb-1">No matching campus events found</h3>
-              <p className="text-xs text-neutral-400 mb-4">
-                Try clearing your search query, selecting "All Categories", or toggling All India events on.
+
+          </main>
+
+          {/* Clean Minimalist Footer */}
+          <footer className="border-t border-neutral-800 bg-[#04060A] py-8 mt-auto">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-neutral-500 font-mono">
+              <div className="flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-emerald-400" />
+                <span className="text-neutral-300 font-semibold font-heading">NEXUSCAMPUS</span>
+                <span>— Authorized College Events & Hackathon Directory</span>
+              </div>
+
+              <div className="flex items-center gap-4">
+                <button onClick={() => setViewMode('story')} className="hover:text-emerald-400 transition-colors cursor-pointer text-emerald-400 font-bold">
+                  3D Story Chronicles
+                </button>
+                <button onClick={() => setIsTransitOpen(true)} className="hover:text-emerald-400 transition-colors cursor-pointer">
+                  Transit Radar
+                </button>
+                <button onClick={() => setIsHostModalOpen(true)} className="hover:text-white transition-colors cursor-pointer">
+                  List Your Fest
+                </button>
+                <a
+                  href="https://github.com/mradityasonicse/NexusCampus"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-1 hover:text-white transition-colors"
+                >
+                  <GithubIcon className="w-3.5 h-3.5" />
+                  <span>GitHub</span>
+                </a>
+              </div>
+
+              <p className="text-neutral-600">
+                NIT Raipur • IIIT Naya Raipur • Rungta • BIT Durg • CSVTU
               </p>
-              <button
-                onClick={() => {
-                  setSearchQuery('');
-                  setSelectedCategory('All Categories');
-                  setSelectedCollege('All Colleges');
-                  setIsRegionalOnly(false);
-                }}
-                className="px-4 py-2 rounded-xl text-xs font-semibold bg-emerald-400 text-black hover:bg-emerald-300 transition-colors cursor-pointer font-heading"
-              >
-                Reset All Filters
-              </button>
             </div>
-          )}
+          </footer>
 
         </div>
+      )}
 
-      </main>
-
-      {/* Global Command Palette (Ctrl+K) */}
+      {/* Global Interactive Modals (Accessible from both Story Mode & Directory) */}
       <CommandPalette
         isOpen={isCommandPaletteOpen}
         onClose={() => setIsCommandPaletteOpen(false)}
         onSelectEvent={(ev) => setSelectedEvent(ev)}
         onOpenHostModal={() => setIsHostModalOpen(true)}
         onOpenTransit={() => setIsTransitOpen(true)}
-        onFilterCollege={(col) => setSelectedCollege(col)}
+        onFilterCollege={(col) => {
+          setSelectedCollege(col);
+          setViewMode('directory');
+        }}
       />
 
-      {/* Central India Campus Transit Guide Modal */}
       <TransitGuideModal
         isOpen={isTransitOpen}
         onClose={() => setIsTransitOpen(false)}
       />
 
-      {/* Event Details Deep Dive Modal */}
       <EventModal
         event={selectedEvent}
         onClose={() => setSelectedEvent(null)}
       />
 
-      {/* Host Event / Organizer Modal */}
       <HostEventModal
         isOpen={isHostModalOpen}
         onClose={() => setIsHostModalOpen(false)}
         onAddEvent={handleAddEvent}
       />
-
-      {/* 3D Chronicles of Aavartan & Vigyaan Story Experience */}
-      <AavartanStoryExperience
-        isOpen={isStoryOpen}
-        onClose={() => setIsStoryOpen(false)}
-        onNavigateToCategory={(cat) => setSelectedCategory(cat)}
-      />
-
-      {/* Clean Minimalist Footer */}
-      <footer className="border-t border-neutral-800 bg-[#04060A] py-8 mt-auto">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-neutral-500 font-mono">
-          <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-emerald-400" />
-            <span className="text-neutral-300 font-semibold font-heading">NEXUSCAMPUS</span>
-            <span>— Authorized College Events & Hackathon Directory</span>
-          </div>
-
-          <div className="flex items-center gap-4">
-            <button onClick={() => setIsTransitOpen(true)} className="hover:text-emerald-400 transition-colors cursor-pointer">
-              Transit Radar
-            </button>
-            <button onClick={() => setIsHostModalOpen(true)} className="hover:text-white transition-colors cursor-pointer">
-              List Your Fest
-            </button>
-            <a
-              href="https://github.com/mradityasonicse/NexusCampus"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-1 hover:text-white transition-colors"
-            >
-              <GithubIcon className="w-3.5 h-3.5" />
-              <span>GitHub</span>
-            </a>
-          </div>
-
-          <p className="text-neutral-600">
-            NIT Raipur • IIIT Naya Raipur • Rungta • BIT Durg • CSVTU
-          </p>
-        </div>
-      </footer>
-
-    </div>
+    </>
   );
 }
 
