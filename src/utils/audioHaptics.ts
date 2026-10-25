@@ -2,6 +2,7 @@
 class AudioHapticsEngine {
   private ctx: AudioContext | null = null;
   public enabled: boolean = true;
+  private listeners: ((active: boolean) => void)[] = [];
 
   private initContext() {
     if (!this.ctx && typeof window !== 'undefined') {
@@ -10,6 +11,20 @@ class AudioHapticsEngine {
         this.ctx = new AudioCtx();
       }
     }
+  }
+
+  public subscribe(listener: (active: boolean) => void) {
+    this.listeners.push(listener);
+    return () => {
+      this.listeners = this.listeners.filter(l => l !== listener);
+    };
+  }
+
+  private triggerPulse() {
+    this.listeners.forEach(l => l(true));
+    setTimeout(() => {
+      this.listeners.forEach(l => l(false));
+    }, 120);
   }
 
   // Soft futuristic click
@@ -35,6 +50,7 @@ class AudioHapticsEngine {
 
       osc.start();
       osc.stop(this.ctx.currentTime + 0.04);
+      this.triggerPulse();
     } catch {
       // Audio autoplay policy fallback
     }
@@ -63,6 +79,35 @@ class AudioHapticsEngine {
 
       osc.start();
       osc.stop(this.ctx.currentTime + 0.03);
+      this.triggerPulse();
+    } catch {
+      // Fallback
+    }
+  }
+
+  // Rapid mechanical typewriter cyber blip for AI response streaming
+  playTyping() {
+    if (!this.enabled) return;
+    try {
+      this.initContext();
+      if (!this.ctx) return;
+      if (this.ctx.state === 'suspended') this.ctx.resume();
+
+      const osc = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(1800 + Math.random() * 400, this.ctx.currentTime);
+
+      gain.gain.setValueAtTime(0.008, this.ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.0001, this.ctx.currentTime + 0.015);
+
+      osc.connect(gain);
+      gain.connect(this.ctx.destination);
+
+      osc.start();
+      osc.stop(this.ctx.currentTime + 0.015);
+      this.triggerPulse();
     } catch {
       // Fallback
     }
@@ -94,6 +139,7 @@ class AudioHapticsEngine {
         osc.start(startTime);
         osc.stop(startTime + 0.25);
       });
+      this.triggerPulse();
     } catch {
       // Fallback
     }
