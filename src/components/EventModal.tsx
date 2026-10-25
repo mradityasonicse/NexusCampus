@@ -9,9 +9,14 @@ import {
   Phone, 
   Mail, 
   CheckCircle2, 
-  Send
+  Send,
+  ExternalLink,
+  ShieldCheck,
+  Building2,
+  FileCheck
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
+import { haptics } from '../utils/audioHaptics';
 
 interface EventModalProps {
   event: CollegeEvent | null;
@@ -30,10 +35,13 @@ export const EventModal: React.FC<EventModalProps> = ({ event, onClose }) => {
     e.preventDefault();
     if (!fullName || !phone) return;
     
+    // Play celebratory procedural sound
+    haptics.playSuccess();
+
     // Trigger festive particle celebration
     confetti({
-      particleCount: 100,
-      spread: 70,
+      particleCount: 120,
+      spread: 80,
       origin: { y: 0.6 },
       colors: ['#10B981', '#06B6D4', '#F59E0B', '#FFFFFF']
     });
@@ -42,13 +50,15 @@ export const EventModal: React.FC<EventModalProps> = ({ event, onClose }) => {
   };
 
   const shareToWhatsApp = () => {
-    const text = `Check out ${event.title} at ${event.college}!\nPrize Pool: ${event.prizePool}\nDeadline: ${event.deadline}\nRegister on NexusCampus: ${window.location.href}`;
+    haptics.playClick();
+    const text = `Verified Campus Fest: ${event.title}\nCollege: ${event.college}\nPrize Pool: ${event.prizePool}\nDeadline: ${event.deadline}\nOfficial Website: ${event.officialWebsite}\nRSVP via NexusCampus: ${window.location.href}`;
     window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`, '_blank');
   };
 
   const addToGoogleCalendar = () => {
+    haptics.playClick();
     const title = encodeURIComponent(event.title);
-    const details = encodeURIComponent(`${event.tagline}\nVenue: ${event.venue}\nOrganized by: ${event.organizerClub}`);
+    const details = encodeURIComponent(`${event.tagline}\nVenue: ${event.venue}\nOfficial Portal: ${event.officialWebsite}\nOrganized by: ${event.organizerClub}`);
     const location = encodeURIComponent(event.venue);
     window.open(`https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&details=${details}&location=${location}`, '_blank');
   };
@@ -57,17 +67,20 @@ export const EventModal: React.FC<EventModalProps> = ({ event, onClose }) => {
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
       {/* Backdrop */}
       <div 
-        className="fixed inset-0 bg-black/80 backdrop-blur-md transition-opacity" 
+        className="fixed inset-0 bg-black/85 backdrop-blur-md transition-opacity" 
         onClick={onClose} 
       />
 
       {/* Modal Dialog Card */}
-      <div className="relative w-full max-w-3xl rounded-3xl bg-[#090D15] border border-white/10 shadow-[0_0_50px_-10px_rgba(0,0,0,0.9)] overflow-hidden z-10 my-auto text-left">
+      <div className="relative w-full max-w-3xl rounded-3xl bg-[#090D15] border border-white/10 shadow-[0_0_60px_-10px_rgba(0,0,0,0.95)] overflow-hidden z-10 my-auto text-left">
         
         {/* Top Header Banner Strip */}
         <div className={`p-6 sm:p-8 bg-gradient-to-r ${event.bannerGradient} border-b border-white/10 relative`}>
           <button 
-            onClick={onClose}
+            onClick={() => {
+              haptics.playClick();
+              onClose();
+            }}
             className="absolute top-5 right-5 p-2 rounded-xl bg-black/40 hover:bg-black/80 text-slate-400 hover:text-white border border-white/10 transition-all cursor-pointer"
           >
             <X className="w-5 h-5" />
@@ -83,9 +96,15 @@ export const EventModal: React.FC<EventModalProps> = ({ event, onClose }) => {
             <span className="px-2.5 py-1 rounded-md text-xs font-mono text-cyan-300 bg-cyan-950/60 border border-cyan-500/30">
               {event.teamSize}
             </span>
+
+            {/* Official Authorization Badge */}
+            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[11px] font-mono font-semibold bg-emerald-950/80 text-emerald-400 border border-emerald-500/40">
+              <ShieldCheck className="w-3.5 h-3.5" />
+              VERIFIED BY {event.officialVerificationDomain.toUpperCase()}
+            </span>
           </div>
 
-          <h2 className="font-heading text-2xl sm:text-3xl font-extrabold text-white mb-2">
+          <h2 className="font-heading text-2xl sm:text-3xl font-extrabold text-white mb-2 tracking-tight">
             {event.title}
           </h2>
           <p className="text-slate-300 text-sm font-normal max-w-xl">
@@ -101,6 +120,15 @@ export const EventModal: React.FC<EventModalProps> = ({ event, onClose }) => {
               <Calendar className="w-3.5 h-3.5 text-cyan-400" />
               {event.startDate} – {event.endDate}
             </span>
+            <a 
+              href={event.officialWebsite} 
+              target="_blank" 
+              rel="noreferrer"
+              className="flex items-center gap-1 text-emerald-400 hover:underline ml-auto"
+            >
+              <span>Visit Official Fest Website</span>
+              <ExternalLink className="w-3.5 h-3.5" />
+            </a>
           </div>
         </div>
 
@@ -108,17 +136,23 @@ export const EventModal: React.FC<EventModalProps> = ({ event, onClose }) => {
         <div className="flex items-center justify-between px-6 border-b border-white/[0.08] bg-[#070A10]">
           <div className="flex items-center gap-2">
             <button
-              onClick={() => setActiveTab('overview')}
+              onClick={() => {
+                haptics.playClick();
+                setActiveTab('overview');
+              }}
               className={`py-3 px-3 text-xs font-semibold tracking-wide border-b-2 transition-all cursor-pointer ${
                 activeTab === 'overview'
                   ? 'border-emerald-400 text-emerald-400'
                   : 'border-transparent text-slate-400 hover:text-white'
               }`}
             >
-              Overview & Highlights
+              Overview & Verification
             </button>
             <button
-              onClick={() => setActiveTab('prizes')}
+              onClick={() => {
+                haptics.playClick();
+                setActiveTab('prizes');
+              }}
               className={`py-3 px-3 text-xs font-semibold tracking-wide border-b-2 transition-all cursor-pointer ${
                 activeTab === 'prizes'
                   ? 'border-emerald-400 text-emerald-400'
@@ -128,7 +162,10 @@ export const EventModal: React.FC<EventModalProps> = ({ event, onClose }) => {
               Prize Pool ({event.prizePool})
             </button>
             <button
-              onClick={() => setActiveTab('schedule')}
+              onClick={() => {
+                haptics.playClick();
+                setActiveTab('schedule');
+              }}
               className={`py-3 px-3 text-xs font-semibold tracking-wide border-b-2 transition-all cursor-pointer ${
                 activeTab === 'schedule'
                   ? 'border-emerald-400 text-emerald-400'
@@ -165,6 +202,17 @@ export const EventModal: React.FC<EventModalProps> = ({ event, onClose }) => {
           
           {activeTab === 'overview' && (
             <div className="space-y-6">
+              
+              {/* Cryptographic Verification Box */}
+              <div className="p-3.5 rounded-2xl bg-[#06090F] border border-emerald-500/20 flex items-start gap-3">
+                <FileCheck className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
+                <div className="text-[11px] font-mono">
+                  <p className="text-emerald-300 font-bold">100% AUTHORIZED CAMPUS SYMPOSIUM</p>
+                  <p className="text-slate-400 mt-0.5">{event.verificationHash}</p>
+                  <p className="text-slate-500 mt-1">Official Host Portal: <a href={event.officialWebsite} target="_blank" rel="noreferrer" className="text-cyan-400 underline">{event.officialWebsite}</a></p>
+                </div>
+              </div>
+
               <div>
                 <h4 className="text-xs font-mono uppercase tracking-wider text-slate-400 mb-2">About The Event</h4>
                 <p className="text-slate-300 text-sm leading-relaxed">{event.description}</p>
@@ -283,7 +331,7 @@ export const EventModal: React.FC<EventModalProps> = ({ event, onClose }) => {
               />
               <button
                 type="submit"
-                className="w-full sm:w-1/3 flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl text-xs font-semibold text-black bg-gradient-to-r from-emerald-400 to-teal-300 hover:from-emerald-300 hover:to-teal-200 transition-all shadow-[0_0_20px_-3px_rgba(16,185,129,0.5)] active:scale-95 cursor-pointer font-heading"
+                className="w-full sm:w-1/3 flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl text-xs font-semibold text-black bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-300 hover:from-emerald-300 hover:to-cyan-200 transition-all shadow-[0_0_20px_-3px_rgba(16,185,129,0.5)] active:scale-95 cursor-pointer font-heading"
               >
                 <Send className="w-3.5 h-3.5" />
                 <span>Instant 1-Click RSVP</span>

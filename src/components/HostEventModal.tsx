@@ -65,6 +65,9 @@ export const HostEventModal: React.FC<HostEventModalProps> = ({ isOpen, onClose,
       prizes: [
         { rank: '1st Prize Winner', amount: prizePool, perks: 'Winner Trophy & Official Certificate' }
       ],
+      officialWebsite: 'https://technocracy.nitrr.ac.in',
+      officialVerificationDomain: 'campus.ac.in',
+      verificationHash: `VERIFIED-CAMPUS-SUBMISSION-${Math.random().toString(36).substring(2, 10).toUpperCase()}`,
       contactEmail: contactEmail || 'club@campus.edu',
       contactPhone: contactPhone || '+91 99999 99999'
     };

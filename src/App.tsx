@@ -7,6 +7,7 @@ import { EventModal } from './components/EventModal';
 import { TeammateSection } from './components/TeammateSection';
 import { CampusLeaderboard } from './components/CampusLeaderboard';
 import { HostEventModal } from './components/HostEventModal';
+import { CyberCanvas } from './components/CyberCanvas';
 import { Compass, ArrowUpRight } from 'lucide-react';
 
 export function App() {
@@ -59,7 +60,9 @@ export function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#05070B] text-[#E2E8F0] flex flex-col font-sans selection:bg-emerald-500/30 selection:text-emerald-300">
+    <div className="min-h-screen bg-[#05070B] text-[#E2E8F0] flex flex-col font-sans selection:bg-emerald-500/30 selection:text-emerald-300 relative overflow-x-hidden">
+      {/* Interactive Vector Particle Grid */}
+      <CyberCanvas />
       
       {/* Top Navigation */}
       <Navbar
