@@ -76,32 +76,32 @@ export const Navbar: React.FC<NavbarProps> = ({
           {/* Right Action Controls */}
           <div className="flex items-center gap-2">
             
-            {/* 3D Story Mode Trigger */}
-            <button
-              onClick={() => {
-                haptics.playWarp();
-                onOpenStory();
-              }}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-emerald-500/40 bg-emerald-500/15 hover:bg-emerald-500/25 text-xs font-mono text-emerald-300 transition-all cursor-pointer shadow-[0_0_20px_rgba(16,185,129,0.25)]"
-              title={viewMode === 'story' ? 'Switch to Events Directory Grid' : 'Experience 3D Chronicles of Aavartan & Vigyaan'}
-            >
-              <Sparkles className="w-3.5 h-3.5 text-emerald-400 animate-spin" style={{ animationDuration: '5s' }} />
-              <span className="font-bold">{viewMode === 'story' ? '⚡ Open Directory' : '🎬 3D Fest Story'}</span>
-            </button>
-
-            {/* 3D Pass Trigger */}
+            {/* 3D Holo Pass Trigger */}
             {onOpenPass && (
               <button
                 onClick={() => {
                   haptics.playClick();
                   onOpenPass();
                 }}
-                className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-amber-500/40 bg-amber-500/15 hover:bg-amber-500/25 text-xs font-mono text-amber-300 transition-all cursor-pointer shadow-[0_0_15px_rgba(245,158,11,0.2)]"
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-emerald-500/40 bg-emerald-500/15 hover:bg-emerald-500/25 text-xs font-mono text-emerald-300 transition-all cursor-pointer shadow-[0_0_15px_rgba(16,185,129,0.2)]"
                 title="Claim Official 3D Fest Hologram Pass"
               >
-                <span>🎫 3D Pass</span>
+                <span>🎫 3D PASS</span>
               </button>
             )}
+
+            {/* 3D Chronicles Trigger */}
+            <button
+              onClick={() => {
+                haptics.playWarp();
+                onOpenStory();
+              }}
+              className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-neutral-700 bg-neutral-900/80 hover:bg-neutral-800 text-xs font-mono text-neutral-300 transition-all cursor-pointer"
+              title="Experience 3D Chronicles of Aavartan & Vigyaan"
+            >
+              <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
+              <span>3D CHRONICLES</span>
+            </button>
 
             {/* Celestial Technocracy Theme Toggle */}
             <button

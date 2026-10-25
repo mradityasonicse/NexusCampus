@@ -1,6 +1,11 @@
-import React from 'react';
-import { Search, Filter, ShieldCheck, MapPin, Sparkles, Orbit } from 'lucide-react';
+import React, { useRef } from 'react';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
+import { Search, Filter, ShieldCheck, Orbit, Sparkles } from 'lucide-react';
 import { ThreeHeroGlobe } from './ThreeHeroGlobe';
+import { haptics } from '../utils/audioHaptics';
+
+gsap.registerPlugin(useGSAP);
 
 interface HeroSectionProps {
   searchQuery: string;
@@ -27,10 +32,46 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   totalPrizePool,
   totalEvents,
 }) => {
+  const heroRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(
+    () => {
+      const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+
+      tl.from('.hero-badge', {
+        opacity: 0,
+        y: -15,
+        duration: 0.6,
+      })
+      .from('.hero-title-line', {
+        opacity: 0,
+        y: 28,
+        stagger: 0.1,
+        duration: 0.8,
+      }, '-=0.3')
+      .from('.hero-desc', {
+        opacity: 0,
+        y: 18,
+        duration: 0.6,
+      }, '-=0.4')
+      .from('.hero-telemetry', {
+        opacity: 0,
+        scale: 0.98,
+        duration: 0.6,
+      }, '-=0.3')
+      .from('.hero-search-box', {
+        opacity: 0,
+        y: 15,
+        duration: 0.5,
+      }, '-=0.2');
+    },
+    { scope: heroRef }
+  );
+
   return (
-    <div className="relative pt-8 pb-8 border-b border-neutral-900 bg-gradient-to-b from-[#080B13] via-[#05070B] to-[#04060A] overflow-hidden">
+    <div ref={heroRef} className="relative pt-8 pb-8 border-b border-neutral-900 bg-gradient-to-b from-[#080B13] via-[#05070B] to-[#04060A] overflow-hidden">
       
-      {/* Background radial gradient spotlight */}
+      {/* Background ambient radial gradients */}
       <div className="absolute top-0 right-1/4 w-[500px] h-[400px] bg-emerald-500/5 rounded-full blur-[140px] pointer-events-none" />
       <div className="absolute top-1/3 left-1/4 w-[400px] h-[300px] bg-cyan-500/5 rounded-full blur-[120px] pointer-events-none" />
 
@@ -43,25 +84,29 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           <div className="lg:col-span-7 text-left">
             
             {/* Accreditation Badge */}
-            <div className="flex items-center gap-2 mb-4">
+            <div className="hero-badge flex items-center gap-2 mb-4">
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-mono">
                 <ShieldCheck className="w-3.5 h-3.5" />
                 100% Authorized Institutional Directory • Official .ac.in & .gov.in Portals
               </span>
             </div>
 
-            {/* Headline */}
-            <h1 className="font-heading text-3xl sm:text-5xl font-extrabold text-white tracking-tight leading-[1.08] mb-4">
-              Central India & National Campus Events Directory
+            {/* Headline with kinetic GSAP stagger targets */}
+            <h1 className="font-heading text-3xl sm:text-5xl font-black text-white tracking-tight leading-[1.08] mb-4">
+              <span className="hero-title-line block">CENTRAL INDIA & NATIONAL</span>
+              <span className="hero-title-line block text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400">
+                CAMPUS EVENTS DIRECTORY
+              </span>
             </h1>
             
-            <p className="text-neutral-300 text-sm sm:text-base leading-relaxed mb-6 max-w-2xl">
+            <p className="hero-desc text-neutral-300 text-sm sm:text-base leading-relaxed mb-6 max-w-2xl font-sans font-light">
               Direct access to official hackathons, technical symposia, and robotics arenas across NIT Raipur, IIIT Naya Raipur, Rungta Bhilai, BIT Durg, CSVTU, and top national institutes. All dates, rulebooks, and registration helplines are verified against institutional records.
             </p>
 
             {/* Clean Verified Telemetry Strip */}
-            <div className="flex flex-wrap items-center gap-4 sm:gap-6 py-3 px-4 rounded-xl bg-neutral-900/60 border border-neutral-800/80 mb-6 text-xs font-mono">
-              <div>
+            <div className="hero-telemetry flex flex-wrap items-center gap-4 sm:gap-6 py-3 px-4 rounded-xl bg-neutral-900/60 border border-neutral-800/80 mb-6 text-xs font-mono">
+              <div className="flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
                 <span className="text-neutral-500">Verified Events: </span>
                 <span className="text-white font-bold">{totalEvents} Active Symposia</span>
               </div>
@@ -78,7 +123,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             </div>
 
             {/* Search Input */}
-            <div className="relative">
+            <div className="hero-search-box relative">
               <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-neutral-500">
                 <Search className="w-4 h-4" />
               </div>
@@ -135,12 +180,15 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         {/* Filter Pills & College Dropdown Strip */}
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 pt-4 border-t border-neutral-900">
           
-          {/* Category Pills (No Emojis) */}
+          {/* Category Pills */}
           <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar pb-1 sm:pb-0">
             {categoryList.map((cat) => (
               <button
                 key={cat}
-                onClick={() => setSelectedCategory(cat)}
+                onClick={() => {
+                  haptics.playClick();
+                  setSelectedCategory(cat);
+                }}
                 className={`px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap transition-colors cursor-pointer ${
                   selectedCategory === cat
                     ? 'bg-emerald-400 text-black font-semibold'
@@ -156,7 +204,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           <div className="relative min-w-[220px]">
             <select
               value={selectedCollege}
-              onChange={(e) => setSelectedCollege(e.target.value)}
+              onChange={(e) => {
+                haptics.playClick();
+                setSelectedCollege(e.target.value);
+              }}
               className="w-full appearance-none px-3 py-1.5 bg-neutral-900 border border-neutral-800 rounded-lg text-xs font-mono text-neutral-300 focus:outline-none focus:border-neutral-700 cursor-pointer pr-8"
             >
               {collegeList.map((col) => (

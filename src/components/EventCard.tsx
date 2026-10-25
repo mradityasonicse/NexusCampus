@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import type { CollegeEvent } from '../data/events';
-import { Calendar, Clock, MapPin, Hourglass, Trophy, ExternalLink, ArrowRight, ShieldCheck, Play, Sparkles } from 'lucide-react';
+import { Calendar, Clock, MapPin, Hourglass, Trophy, ExternalLink, ArrowRight, ShieldCheck, Play } from 'lucide-react';
 import { haptics } from '../utils/audioHaptics';
 
 interface EventCardProps {
@@ -11,40 +11,80 @@ interface EventCardProps {
 }
 
 export const EventCard: React.FC<EventCardProps> = ({ event, onSelect }) => {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const [isHovered, setIsHovered] = useState(false);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    setMousePos({
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top,
+    });
+  };
+
   return (
     <motion.div
+      ref={cardRef}
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.35, ease: 'easeOut' }}
-      whileHover={{ y: -5 }}
-      onMouseEnter={() => haptics.playHover()}
+      whileHover={{ y: -6, transition: { duration: 0.2 } }}
+      onMouseEnter={() => {
+        setIsHovered(true);
+        haptics.playHover();
+      }}
+      onMouseLeave={() => setIsHovered(false)}
+      onMouseMove={handleMouseMove}
       onClick={() => {
         haptics.playClick();
         onSelect(event);
       }}
-      className="group relative flex flex-col justify-between rounded-2xl bg-[#080B12]/80 hover:bg-[#0D121F] border border-neutral-800/80 hover:border-emerald-500/40 transition-all duration-300 cursor-pointer text-left overflow-hidden shadow-xl hover:shadow-[0_12px_40px_rgba(16,185,129,0.12)]"
+      className="group relative flex flex-col justify-between rounded-2xl bg-[#080B12]/90 hover:bg-[#0B101C] border border-neutral-800/80 hover:border-emerald-500/50 transition-all duration-300 cursor-pointer text-left overflow-hidden shadow-xl hover:shadow-[0_16px_50px_rgba(16,185,129,0.14)]"
     >
-      <div>
+      {/* Interactive Radial Cursor Spotlight Inside Card */}
+      {isHovered && (
+        <div
+          className="pointer-events-none absolute -inset-px rounded-2xl opacity-100 transition-opacity duration-300 z-10"
+          style={{
+            background: `radial-gradient(380px circle at ${mousePos.x}px ${mousePos.y}px, rgba(16, 185, 129, 0.12), transparent 75%)`,
+          }}
+        />
+      )}
+
+      {/* Specular Radial Border Glow Following Cursor */}
+      {isHovered && (
+        <div
+          className="pointer-events-none absolute inset-0 rounded-2xl z-20 border border-emerald-400/50"
+          style={{
+            maskImage: `radial-gradient(200px circle at ${mousePos.x}px ${mousePos.y}px, black 35%, transparent 80%)`,
+            WebkitMaskImage: `radial-gradient(200px circle at ${mousePos.x}px ${mousePos.y}px, black 35%, transparent 80%)`,
+          }}
+        />
+      )}
+
+      <div className="relative z-10">
         {/* Top Graphic Banner with Technocracy-Style Typography Banner */}
         <div className="relative aspect-[16/9] w-full overflow-hidden bg-neutral-950">
           <img
             src={event.coverImage}
             alt={event.title}
             loading="lazy"
-            className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out filter brightness-[0.85] group-hover:brightness-95"
+            className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out filter brightness-[0.82] group-hover:brightness-95"
           />
 
           {/* Vignette Gradients */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#080B12] via-transparent to-black/30 pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#080B12] via-[#080B12]/20 to-black/40 pointer-events-none" />
 
           {/* Top Overlaid Badges */}
           <div className="absolute top-3 left-3 right-3 flex items-center justify-between gap-2 z-10">
-            <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-[11px] font-mono text-white bg-black/75 backdrop-blur-md border border-white/10 shadow">
+            <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-[11px] font-mono text-white bg-black/80 backdrop-blur-md border border-white/10 shadow">
               <MapPin className="w-3 h-3 text-emerald-400" />
               {event.shortCollege}
             </span>
 
-            <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold uppercase bg-black/75 backdrop-blur-md text-emerald-400 border border-emerald-500/30">
+            <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold uppercase bg-black/80 backdrop-blur-md text-emerald-400 border border-emerald-500/30">
               {event.category}
             </span>
           </div>
@@ -57,7 +97,7 @@ export const EventCard: React.FC<EventCardProps> = ({ event, onSelect }) => {
             </span>
 
             {event.videoTeaser && (
-              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-mono bg-black/75 text-cyan-300 border border-cyan-500/30 backdrop-blur-md">
+              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-mono bg-black/80 text-cyan-300 border border-cyan-500/30 backdrop-blur-md">
                 <Play className="w-2.5 h-2.5 fill-cyan-400" />
                 {event.videoTeaser.duration} Teaser
               </span>
@@ -117,7 +157,7 @@ export const EventCard: React.FC<EventCardProps> = ({ event, onSelect }) => {
       </div>
 
       {/* Card Footer: Prize Pool & Official Register Action */}
-      <div className="px-5 pb-5 pt-3 border-t border-neutral-800/60 bg-neutral-900/30">
+      <div className="relative z-10 px-5 pb-5 pt-3 border-t border-neutral-800/60 bg-neutral-900/40">
         <div className="flex items-center justify-between text-xs font-mono mb-3">
           <div>
             <span className="text-neutral-500 block text-[10px] uppercase tracking-wider">Prize Pool</span>
