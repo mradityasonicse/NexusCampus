@@ -11,6 +11,7 @@ import { CampusMarquee } from './components/CampusMarquee';
 import { TransitGuideModal } from './components/TransitGuideModal';
 import { TechnocracyRail } from './components/TechnocracyRail';
 import { FloatingControls } from './components/FloatingControls';
+import { AavartanStoryExperience } from './components/AavartanStoryExperience';
 import { Compass, ArrowUpRight, ShieldCheck, MapPin } from 'lucide-react';
 
 const GithubIcon = ({ className = "w-3.5 h-3.5" }: { className?: string }) => (
@@ -30,6 +31,8 @@ export function App() {
   const [isHostModalOpen, setIsHostModalOpen] = useState<boolean>(false);
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState<boolean>(false);
   const [isTransitOpen, setIsTransitOpen] = useState<boolean>(false);
+  const [isStoryOpen, setIsStoryOpen] = useState<boolean>(false);
+  const [isTechnocracyTheme, setIsTechnocracyTheme] = useState<boolean>(true);
 
   // Filter events based on active controls
   const filteredEvents = useMemo(() => {
@@ -73,6 +76,14 @@ export function App() {
   return (
     <div className="min-h-screen bg-[#06080D] text-[#E2E8F0] flex flex-col font-sans selection:bg-emerald-500/30 selection:text-emerald-300 relative">
       
+      {/* Technocracy NIT Raipur Celestial Sky & Fest Atmosphere Layer */}
+      {isTechnocracyTheme && (
+        <div 
+          className="fixed inset-0 pointer-events-none z-0 opacity-20 filter brightness-90 bg-cover bg-center transition-opacity duration-1000"
+          style={{ backgroundImage: `url('https://technocracy.nitrr.ac.in/static/media/event.91b5ee11360ca6c1e5c2.webp')` }}
+        />
+      )}
+
       {/* Top Navigation */}
       <Navbar
         isRegionalOnly={isRegionalOnly}
@@ -80,6 +91,9 @@ export function App() {
         onOpenHostModal={() => setIsHostModalOpen(true)}
         onOpenCommandPalette={() => setIsCommandPaletteOpen(true)}
         onOpenTransit={() => setIsTransitOpen(true)}
+        onOpenStory={() => setIsStoryOpen(true)}
+        isTechnocracyTheme={isTechnocracyTheme}
+        onToggleTechnocracyTheme={() => setIsTechnocracyTheme(!isTechnocracyTheme)}
         eventCount={filteredEvents.length}
       />
 
@@ -255,6 +269,13 @@ export function App() {
         isOpen={isHostModalOpen}
         onClose={() => setIsHostModalOpen(false)}
         onAddEvent={handleAddEvent}
+      />
+
+      {/* 3D Chronicles of Aavartan & Vigyaan Story Experience */}
+      <AavartanStoryExperience
+        isOpen={isStoryOpen}
+        onClose={() => setIsStoryOpen(false)}
+        onNavigateToCategory={(cat) => setSelectedCategory(cat)}
       />
 
       {/* Clean Minimalist Footer */}

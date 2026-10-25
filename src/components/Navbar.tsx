@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Search, MapPin, Globe2, Plus, Train } from 'lucide-react';
+import React from 'react';
+import { Search, MapPin, Globe2, Plus, Train, Sparkles, Orbit } from 'lucide-react';
 import { haptics } from '../utils/audioHaptics';
 
 const GithubIcon = ({ className = "w-4 h-4" }: { className?: string }) => (
@@ -15,6 +15,9 @@ interface NavbarProps {
   onOpenHostModal: () => void;
   onOpenCommandPalette: () => void;
   onOpenTransit: () => void;
+  onOpenStory: () => void;
+  isTechnocracyTheme: boolean;
+  onToggleTechnocracyTheme: () => void;
   eventCount: number;
 }
 
@@ -24,6 +27,9 @@ export const Navbar: React.FC<NavbarProps> = ({
   onOpenHostModal,
   onOpenCommandPalette,
   onOpenTransit,
+  onOpenStory,
+  isTechnocracyTheme,
+  onToggleTechnocracyTheme,
   eventCount,
 }) => {
   return (
@@ -64,19 +70,49 @@ export const Navbar: React.FC<NavbarProps> = ({
           </button>
 
           {/* Right Action Controls */}
-          <div className="flex items-center gap-2.5">
+          <div className="flex items-center gap-2">
             
+            {/* 3D Story Mode Trigger */}
+            <button
+              onClick={() => {
+                haptics.playClick();
+                onOpenStory();
+              }}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-emerald-500/30 bg-emerald-500/10 hover:bg-emerald-500/20 text-xs font-mono text-emerald-300 transition-colors cursor-pointer shadow-[0_0_15px_rgba(16,185,129,0.15)]"
+              title="Experience Chronicles of Aavartan & Vigyaan in 3D"
+            >
+              <Sparkles className="w-3.5 h-3.5 text-emerald-400 animate-spin" style={{ animationDuration: '6s' }} />
+              <span className="hidden sm:inline font-semibold">3D Fest Story</span>
+            </button>
+
+            {/* Celestial Technocracy Theme Toggle */}
+            <button
+              onClick={() => {
+                haptics.playClick();
+                onToggleTechnocracyTheme();
+              }}
+              className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl border text-xs font-mono transition-colors cursor-pointer ${
+                isTechnocracyTheme
+                  ? 'border-purple-500/40 bg-purple-500/20 text-purple-300'
+                  : 'border-neutral-800 bg-neutral-900/60 hover:bg-neutral-800 text-neutral-400 hover:text-white'
+              }`}
+              title="Toggle Technocracy Aavartan Celestial Atmosphere"
+            >
+              <Orbit className="w-3.5 h-3.5 text-purple-400" />
+              <span className="hidden md:inline">Celestial Theme</span>
+            </button>
+
             {/* Transit Route Radar */}
             <button
               onClick={() => {
                 haptics.playClick();
                 onOpenTransit();
               }}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-neutral-800 bg-neutral-900/60 hover:bg-neutral-800 text-xs font-mono text-neutral-300 transition-colors cursor-pointer"
+              className="hidden lg:flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-neutral-800 bg-neutral-900/60 hover:bg-neutral-800 text-xs font-mono text-neutral-300 transition-colors cursor-pointer"
               title="Central India Train & Bus Transit Radar"
             >
               <Train className="w-3.5 h-3.5 text-emerald-400" />
-              <span className="hidden sm:inline">Transit Routes</span>
+              <span>Transit</span>
             </button>
 
             {/* Region Switcher */}
@@ -90,12 +126,12 @@ export const Navbar: React.FC<NavbarProps> = ({
               {isRegionalOnly ? (
                 <>
                   <MapPin className="w-3.5 h-3.5 text-emerald-400" />
-                  <span className="text-white font-medium">Raipur & Central India</span>
+                  <span className="text-white font-medium text-[11px] sm:text-xs">Central India</span>
                 </>
               ) : (
                 <>
                   <Globe2 className="w-3.5 h-3.5 text-cyan-400" />
-                  <span className="text-neutral-300">All India</span>
+                  <span className="text-neutral-300 text-[11px] sm:text-xs">All India</span>
                 </>
               )}
             </div>
@@ -106,10 +142,10 @@ export const Navbar: React.FC<NavbarProps> = ({
                 haptics.playClick();
                 onOpenHostModal();
               }}
-              className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-semibold text-black bg-emerald-400 hover:bg-emerald-300 transition-colors cursor-pointer font-heading"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold text-black bg-emerald-400 hover:bg-emerald-300 transition-colors cursor-pointer font-heading"
             >
               <Plus className="w-3.5 h-3.5 stroke-[2.5]" />
-              <span>List Fest</span>
+              <span className="hidden sm:inline">List Fest</span>
             </button>
 
             {/* GitHub Repo */}

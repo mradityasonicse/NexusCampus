@@ -42,6 +42,11 @@ h1, h2, h3, .font-heading {
   font-family: var(--font-mono);
 }
 
+.font-orbitron {
+  font-family: 'Orbitron', sans-serif;
+  letter-spacing: 0.05em;
+}
+
 /* Procedural Film Grain & Noise Texture Overlay */
 .film-grain {
   position: fixed;

@@ -147,7 +147,7 @@ export const SAMPLE_EVENTS: CollegeEvent[] = [
     verificationHash: 'SHA256: dsa2026nitrr...technocracy.nitrr.ac.in [OFFICIAL ARENA]',
     bannerGradient: 'from-emerald-950/90 via-slate-900 to-black',
     accentColor: '#10B981',
-    coverImage: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1200&q=80',
+    coverImage: 'https://technocracy.nitrr.ac.in/static/media/dsaMarathon.4b42cba622df7da3d0ef.webp',
     galleryImages: [
       'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1000&q=80',
       'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1000&q=80'
@@ -211,7 +211,7 @@ export const SAMPLE_EVENTS: CollegeEvent[] = [
     verificationHash: 'SHA256: drone2026nitrr...technocracy.nitrr.ac.in [OFFICIAL ARENA]',
     bannerGradient: 'from-amber-950/90 via-slate-900 to-black',
     accentColor: '#F59E0B',
-    coverImage: 'https://images.unsplash.com/photo-1508614589041-895b88991e3e?auto=format&fit=crop&w=1200&q=80',
+    coverImage: 'https://technocracy.nitrr.ac.in/static/media/droneRacing.405ba25669066874b6c2.webp',
     galleryImages: [
       'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=1000&q=80',
       'https://images.unsplash.com/photo-1561557944-6e7860d1a7eb?auto=format&fit=crop&w=1000&q=80'
@@ -275,7 +275,7 @@ export const SAMPLE_EVENTS: CollegeEvent[] = [
     verificationHash: 'SHA256: relay2026nitrr...technocracy.nitrr.ac.in [OFFICIAL ARENA]',
     bannerGradient: 'from-cyan-950/90 via-slate-900 to-black',
     accentColor: '#06B6D4',
-    coverImage: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1200&q=80',
+    coverImage: 'https://technocracy.nitrr.ac.in/static/media/codeSprintRelay.0395c8c538e500a5d98e.webp',
     galleryImages: [
       'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1000&q=80',
       'https://images.unsplash.com/photo-1515187029135-18ee286d815b?auto=format&fit=crop&w=1000&q=80'
@@ -340,7 +340,7 @@ export const SAMPLE_EVENTS: CollegeEvent[] = [
     verificationHash: 'SHA256: graphix2026nitrr...technocracy.nitrr.ac.in [OFFICIAL ARENA]',
     bannerGradient: 'from-purple-950/90 via-slate-900 to-black',
     accentColor: '#A855F7',
-    coverImage: 'https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&w=1200&q=80',
+    coverImage: 'https://technocracy.nitrr.ac.in/static/media/technoGraphix.b4e93b48dfc15beddff8.webp',
     galleryImages: [
       'https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?auto=format&fit=crop&w=1000&q=80',
       'https://images.unsplash.com/photo-1567521464027-f127ff144326?auto=format&fit=crop&w=1000&q=80'
@@ -404,7 +404,7 @@ export const SAMPLE_EVENTS: CollegeEvent[] = [
     verificationHash: 'SHA256: robowar2026nitrr...technocracy.nitrr.ac.in [OFFICIAL ARENA]',
     bannerGradient: 'from-red-950/90 via-slate-900 to-black',
     accentColor: '#EF4444',
-    coverImage: 'https://images.unsplash.com/photo-1561557944-6e7860d1a7eb?auto=format&fit=crop&w=1200&q=80',
+    coverImage: 'https://technocracy.nitrr.ac.in/static/media/robowar.d2ef1da8799f84a7c30e.webp',
     galleryImages: [
       'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=1000&q=80',
       'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=1000&q=80'
@@ -468,7 +468,7 @@ export const SAMPLE_EVENTS: CollegeEvent[] = [
     verificationHash: 'SHA256: revcode2026nitrr...technocracy.nitrr.ac.in [OFFICIAL ARENA]',
     bannerGradient: 'from-emerald-950/90 via-slate-900 to-black',
     accentColor: '#10B981',
-    coverImage: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1200&q=80',
+    coverImage: 'https://technocracy.nitrr.ac.in/static/media/dsaMarathon.4b42cba622df7da3d0ef.webp',
     galleryImages: [
       'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1000&q=80',
       'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1000&q=80'
@@ -532,7 +532,7 @@ export const SAMPLE_EVENTS: CollegeEvent[] = [
     verificationHash: 'SHA256: valo2026nitrr...technocracy.nitrr.ac.in [OFFICIAL ARENA]',
     bannerGradient: 'from-pink-950/90 via-slate-900 to-black',
     accentColor: '#EC4899',
-    coverImage: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1200&q=80',
+    coverImage: 'https://technocracy.nitrr.ac.in/static/media/valorant.9d7b48cdfa60d2f395e9.webp',
     galleryImages: [
       'https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=1000&q=80',
       'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1000&q=80'

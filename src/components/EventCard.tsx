@@ -35,16 +35,7 @@ export const EventCard: React.FC<EventCardProps> = ({ event, onSelect }) => {
           />
 
           {/* Vignette Gradients */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#080B12] via-[#080B12]/40 to-black/40 pointer-events-none" />
-
-          {/* Custom Graphic Banner Title (Technocracy Hallmark) */}
-          {event.bannerArtTitle && (
-            <div className="absolute inset-0 flex items-center justify-center pointer-events-none p-4">
-              <span className="font-heading font-black text-2xl sm:text-3xl text-white tracking-widest uppercase drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)] opacity-90 group-hover:scale-110 transition-transform duration-500 text-center">
-                {event.bannerArtTitle}
-              </span>
-            </div>
-          )}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#080B12] via-transparent to-black/30 pointer-events-none" />
 
           {/* Top Overlaid Badges */}
           <div className="absolute top-3 left-3 right-3 flex items-center justify-between gap-2 z-10">
